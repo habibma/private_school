@@ -1,0 +1,8 @@
+*.o
+*.out
+*.exe
+*.log
+*.swp
+*.tmp
+*.dSYM/
+build/
