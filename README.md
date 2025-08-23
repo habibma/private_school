@@ -1,7 +1,7 @@
 # Private Teacher 🧑‍🏫
 
-**Private Teacher** is a set of C++ programs designed to help private teachers and small schools manage their classrooms.  
-The first program in this set helps a teacher keep track of their students, store names and scores, and calculate class averages.
+**Private Teacher** is a C++ program designed to help private teachers manage their classrooms.  
+This program helps a teacher keep track of their students, store names and scores, and calculate class averages.
 
 ## ✨ Features
 - Register teacher’s name and surname
