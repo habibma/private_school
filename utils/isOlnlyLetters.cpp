@@ -1,5 +1,5 @@
 
-#include "../private_teacher.hpp"
+#include "../include/private_teacher.hpp"
 
 bool    isOnlyLetters(const string &s) {
     for (char c : s)

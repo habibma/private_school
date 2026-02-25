@@ -1,45 +1,21 @@
-#include "private_teacher.hpp"
-
-string	getValidName(const string &prompt)
-{
-	string	name;
-	while (true) {
-		cout << prompt;
-		getline(cin, name);
-		if (isOnlyLetters(name)) {
-			return (name);
-		} else {
-			cout << "Invalid input. Only letters are allowed.\n";
-		}
-	}
-}
-
-int	getValidNumber(const string &prompt)
-{
-	int	num;
-	while (true)
-	{
-		cout << prompt;
-		if (cin >> num)
-			return (num);
-		else
-		{
-			cout << "Invalid input! Please enter a number.\n";
-			cin.clear();
-            cin.ignore(1000, '\n');
-		}
-	}
-}
+#include "include/private_teacher.hpp"
+#include "include/Teacher.hpp"
 
 int	main(void)
 {
+	// To start the program, we will first ask the teacher to fill in his/her information and the students' information,
+	//then we will print a report of the class with the average score of the students.
 	// defining a teacher
-	teacher teacher1;
+	Teacher teacher1;
 
-	// to catch the teacher's info
-	teacher1.firstName		= getValidName("Write your first name: ");
-	teacher1.lastName		= getValidName("Write your Last name: ");
-	teacher1.subject		= getValidName("Subject: ");
+	// to catch the teacher's information
+	string	firstName		= getValidName("Write your first name: ");
+	teacher1.setFirstName(firstName);
+	string	lastName		= getValidName("Write your Last name: ");
+	teacher1.setLastName(lastName);
+	string	subject		= getValidName("Subject: ");
+	teacher1.setSubject(subject);
+
 	// to catch the quantity of students of the class
 	int		student_numbers	= getValidNumber("How many students you have? ");
 
@@ -48,9 +24,6 @@ int	main(void)
 
 	// to ignore arbitarily numbers of leftover "\n" in the cin buffer
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-	// to make the vector filling optimized
-	teacher1.students.reserve(student_numbers);
 
 	// the process of populating the vector students from user inputs
 	for (int i = 1; i <= student_numbers; i++)
@@ -64,16 +37,17 @@ int	main(void)
 		//to ignore next_line character for the second
 		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		// to add the struct just built now the tail of the students vector
-		teacher1.students.push_back(s);
+		teacher1.addStudent(s);
 	}
+
 	// To print the class report
-	cout << "\nTeacher: " << teacher1.firstName << " " << teacher1.lastName
-		<< " (" << teacher1.subject << ")\n";
+	cout << "\nTeacher: " << teacher1.getFirstName() << " " << teacher1.getLastName()
+		<< " (" << teacher1.getSubject() << ")\n";
 	cout << "Students:\n";
-    for (const student& student : teacher1.students) {
+    for (const student& student : teacher1.getStudents()) {
         std::cout << " - " << student.name << " : " << student.score << "\n";
     }
-	for (const student &student : teacher1.students)
+	for (const student &student : teacher1.getStudents())
 		sum += student.score;
 	cout << "The Average of Your Class is : " << sum / student_numbers << endl;
 	return (0);

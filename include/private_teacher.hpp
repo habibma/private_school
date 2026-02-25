@@ -14,15 +14,11 @@ struct student
 	int		score;
 };
 
-struct teacher
-{
-	string			firstName;
-	string			lastName;
-	string			subject;
-	vector<student>	students;
-};
-
 // Function declaration
 bool isOnlyLetters(const string &s);
+
+// helper functions
+string	getValidName(const string &prompt);
+int		getValidNumber(const string &prompt);
 
 #endif

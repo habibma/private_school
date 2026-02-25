@@ -1,9 +1,10 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++11
+CXXFLAGS = -Wall -Wextra -Werror -std=c++11
 
 # Files
-SRC = main.cpp ./utils/*.cpp
+INCLUDE_DIRS = -I./include
+SRC = main.cpp $(wildcard ./utils/*.cpp) $(wildcard ./src/*.cpp) $(wildcard ./helpers/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 TARGET = program
 
@@ -14,11 +15,11 @@ $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDE_DIRS) -c $< -o $@
 
-# Explicit header dependencies
-main.o: main.cpp private_teacher.hpp
-utils.o: ./utils/*.cpp private_teacher.hpp
+# Header dependencies
+$(OBJ): include/private_teacher.hpp
+src/%.o: include/Teacher.hpp
 
 clean:
 	rm -f $(OBJ) $(TARGET)
