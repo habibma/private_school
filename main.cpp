@@ -6,15 +6,14 @@ int	main(void)
 	// To start the program, we will first ask the teacher to fill in his/her information and the students' information,
 	//then we will print a report of the class with the average score of the students.
 	// defining a teacher
-	Teacher teacher1;
 
 	// to catch the teacher's information
 	string	firstName		= getValidName("Write your first name: ");
-	teacher1.setFirstName(firstName);
 	string	lastName		= getValidName("Write your Last name: ");
-	teacher1.setLastName(lastName);
 	string	subject		= getValidName("Subject: ");
-	teacher1.setSubject(subject);
+
+	// to build the teacher object with the information just caught
+	Teacher teacher1(firstName, lastName, subject);
 
 	// to catch the quantity of students of the class
 	int		student_numbers	= getValidNumber("How many students you have? ");
