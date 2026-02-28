@@ -13,7 +13,9 @@ int	main(void)
 	string	subject		= getValidName("Subject: ");
 
 	// to build the teacher object with the information just caught
-	Teacher teacher1(firstName, lastName, subject);
+	Teacher *teacher1;
+	
+	teacher1 = new Teacher(firstName, lastName, subject);
 
 	// to catch the quantity of students of the class
 	int		student_numbers	= getValidNumber("How many students you have? ");
@@ -36,18 +38,20 @@ int	main(void)
 		//to ignore next_line character for the second
 		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		// to add the struct just built now the tail of the students vector
-		teacher1.addStudent(s);
+		teacher1->addStudent(s);
 	}
 
 	// To print the class report
-	cout << "\nTeacher: " << teacher1.getFirstName() << " " << teacher1.getLastName()
-		<< " (" << teacher1.getSubject() << ")\n";
+	cout << "\nTeacher: " << teacher1->getFirstName() << " " << teacher1->getLastName()
+		<< " (" << teacher1->getSubject() << ")\n";
 	cout << "Students:\n";
-    for (const student& student : teacher1.getStudents()) {
+    for (const student& student : teacher1->getStudents()) {
         std::cout << " - " << student.name << " : " << student.score << "\n";
     }
-	for (const student &student : teacher1.getStudents())
+	for (const student &student : teacher1->getStudents())
 		sum += student.score;
 	cout << "The Average of Your Class is : " << sum / student_numbers << endl;
+
+	delete teacher1;
 	return (0);
 }
