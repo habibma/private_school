@@ -1,20 +1,21 @@
 #include "../include/Teacher.hpp"
+#include "../include/Classroom.hpp"
+#include "../include/Student.hpp"
 
-Teacher::Teacher() : firstName(""), lastName(""), subject("") {}
+Teacher::Teacher() : firstName(""), lastName("") {}
 Teacher::~Teacher() {}
-Teacher::Teacher(const Teacher &other) : firstName(other.firstName), lastName(other.lastName), subject(other.subject), students(other.students) {}
+Teacher::Teacher(const Teacher &other) : firstName(other.firstName), lastName(other.lastName), classrooms(other.classrooms) {}
 Teacher &Teacher::operator=(const Teacher &other)
 {
 	if (this != &other)
 	{
 		firstName = other.firstName;
 		lastName = other.lastName;
-		subject = other.subject;
-		students = other.students;
+		classrooms = other.classrooms;
 	}
 	return (*this);
 }
-Teacher::Teacher(const string &firstName, const string &lastName, const string &subject) : firstName(firstName), lastName(lastName), subject(subject) {}
+Teacher::Teacher(const string &firstName, const string &lastName) : firstName(firstName), lastName(lastName) {}
 
 //setters
 void Teacher::setFirstName(const string &firstName)
@@ -25,15 +26,14 @@ void Teacher::setLastName(const string &lastName)
 {
 	this->lastName = lastName;
 }
-void Teacher::setSubject(const string &subject)
+
+void Teacher::addClassroom(const Classroom &c) { classrooms.push_back(c); }
+
+void Teacher::addStudentToClassroom(const Student &s, unsigned int classroomIndex)
 {
-	this->subject = subject;
+		classrooms[classroomIndex].addStudent(s);
 }
-
-void Teacher::addStudent(const student &s) { students.push_back(s); }
-
 //getters
 string Teacher::getFirstName() const { return (firstName); }
 string Teacher::getLastName() const { return (lastName); }
-string Teacher::getSubject() const { return (subject); }
-vector<student> Teacher::getStudents() const { return (students); }
+vector<Classroom> Teacher::getClassrooms() const { return (classrooms); }

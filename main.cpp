@@ -3,54 +3,78 @@
 
 int	main(void)
 {
-	// To start the program, we will first ask the teacher to fill in his/her information and the students' information,
-	//then we will print a report of the class with the average score of the students.
-	// defining a teacher
+	// To start the program, we will first ask the teacher to fill in his/her information
+	// Then if they wants to to add a class
+	// Then the class should be the students' information,
+	// Then we will print a report of the class with the average score of the students.
+	// Defining a teacher
+
 
 	// to catch the teacher's information
 	string	firstName		= getValidName("Write your first name: ");
 	string	lastName		= getValidName("Write your Last name: ");
-	string	subject		= getValidName("Subject: ");
-
+	
 	// to build the teacher object with the information just caught
 	Teacher *teacher1;
 	
-	teacher1 = new Teacher(firstName, lastName, subject);
-
-	// to catch the quantity of students of the class
-	int		student_numbers	= getValidNumber("How many students you have? ");
-
-	// to save the calculation of sum of scores
-	double	sum	 = 0;
-
-	// to ignore arbitarily numbers of leftover "\n" in the cin buffer
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-	// the process of populating the vector students from user inputs
-	for (int i = 1; i <= student_numbers; i++)
+	teacher1 = new Teacher(firstName, lastName);
+	
+	while (1)
 	{
-		// declaring a new object (the struct is already defined in the header file. check the minishell.hpp)
-		student	s;
-		// to catch the name of student number i
-		s.name	= getValidName("The name of student " + to_string(i) + ": ");
-		// to catch the score of student number i
-		s.score	= getValidNumber("The score of student " + to_string(i) + ": ");
-		//to ignore next_line character for the second
-		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		// to add the struct just built now the tail of the students vector
-		teacher1->addStudent(s);
-	}
+		string	prompt;
+		cout << "ADD to add a class, START to start the program, or EXIT to exit the program: ";
+		getline(cin, prompt);
+		if (prompt == "ADD")
+		{
+			string subject = getValidName("What is the subject of your class? ");
+			Classroom	classroom(subject);
+			teacher1->addClassroom(classroom);
 
-	// To print the class report
-	cout << "\nTeacher: " << teacher1->getFirstName() << " " << teacher1->getLastName()
-		<< " (" << teacher1->getSubject() << ")\n";
-	cout << "Students:\n";
-    for (const student& student : teacher1->getStudents()) {
-        std::cout << " - " << student.name << " : " << student.score << "\n";
-    }
-	for (const student &student : teacher1->getStudents())
-		sum += student.score;
-	cout << "The Average of Your Class is : " << sum / student_numbers << endl;
+			while (1)
+			{
+				string studentName = getValidName("What is the name of the student? (or type 'DONE' to finish adding students) ");
+				if (studentName == "DONE")
+					break ;
+				int score = getValidNumber("What is the score of the student? ");
+				Student student(studentName, score);
+				teacher1->addStudentToClassroom(student, teacher1->getClassrooms().size() - 1);
+			}
+		}
+		else if (prompt == "START")
+		{
+			if (teacher1->getClassrooms().empty())
+			{
+				cout << "You don't have any class. Please add a class first." << endl;
+				continue ;
+			}
+			for (size_t i = 0; i < teacher1->getClassrooms().size(); i++)
+			{
+				cout << "Class " << i + 1 << ": " << teacher1->getClassrooms()[i].getSubject() << endl;
+				vector<Student> students = teacher1->getClassrooms()[i].getStudents();
+				if (students.empty())
+				{
+					cout << "No students in this class." << endl;
+					continue ;
+				}
+				double totalScore = 0.0;
+				for (size_t j = 0; j < students.size(); j++)
+				{
+					cout << "Student " << j + 1 << ": " << students[j].getName() << ", Score: " << students[j].getScore() << endl;
+					totalScore += students[j].getScore();
+				}
+				double averageScore = totalScore / students.size();
+				cout << "Average Score: " << averageScore << endl;
+			}
+			break ;
+		}
+		else if (prompt == "EXIT")
+		{
+			break ;
+		}
+		else
+			cout << "Invalid input. Please enter 'ADD' or 'START'." << endl;
+	}
+	
 
 	delete teacher1;
 	return (0);

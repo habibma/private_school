@@ -8,12 +8,6 @@
 # include <limits>
 using namespace std;
 
-struct student
-{
-	string	name;
-	int		score;
-};
-
 // Function declaration
 bool isOnlyLetters(const string &s);
 
