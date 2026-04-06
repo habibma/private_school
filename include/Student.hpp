@@ -9,9 +9,9 @@ class Student
 	private:
 		string _name;
 		double _score;
+		Student();
 
 	public:
-		Student();
 		Student(string name, double score);
 		~Student();
 

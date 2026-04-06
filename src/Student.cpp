@@ -1,7 +1,13 @@
 #include "../include/Student.hpp"
+#include <stdexcept>
 
-Student::Student() : _name(""), _score(0.0) {}
-Student::Student(string name, double score) : _name(name), _score(score) {}
+Student::Student() {}
+Student::Student(string name, double score) {
+    if (name.empty())
+        throw invalid_argument("Name cannot be empty.");
+    if (score < 0 || score > 100)
+        throw invalid_argument("Score must be between 0 and 100.");
+}
 Student::~Student() {}
 
 //getters

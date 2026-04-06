@@ -8,7 +8,7 @@ int	main(void)
 	// Then the class should be the students' information,
 	// Then we will print a report of the class with the average score of the students.
 	// Defining a teacher
-
+	
 
 	// to catch the teacher's information
 	string	firstName		= getValidName("Write your first name: ");
