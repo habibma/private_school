@@ -1,5 +1,8 @@
 #include "include/private_teacher.hpp"
 #include "include/Teacher.hpp"
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define RESET "\033[0m"
 
 int	main(void)
 {
@@ -36,8 +39,14 @@ int	main(void)
 				if (studentName == "DONE")
 					break ;
 				int score = getValidNumber("What is the score of the student? ");
-				Student student(studentName, score);
-				teacher1->addStudentToClassroom(student, teacher1->getClassrooms().size() - 1);
+				try {
+					Student student(studentName, score);
+					teacher1->addStudentToClassroom(student, teacher1->getClassrooms().size() - 1);
+					cout << GREEN << "Student added successfully!" << endl << RESET;
+				}
+				catch (const std::exception &e) {
+					cout << RED << "Error: " << e.what() << "Trying again..." << endl << RESET;
+				}
 			}
 		}
 		else if (prompt == "START")
