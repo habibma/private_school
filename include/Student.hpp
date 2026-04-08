@@ -12,7 +12,7 @@ class Student
 		Student();
 
 	public:
-		Student(string name, double score) throw (invalid_argument);
+		Student(string name, double score);
 		~Student();
 
 		//getters

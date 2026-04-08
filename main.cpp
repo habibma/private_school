@@ -1,90 +1,50 @@
 #include "include/private_teacher.hpp"
 #include "include/Teacher.hpp"
-# define RED "\033[31m"
-# define GREEN "\033[32m"
-# define RESET "\033[0m"
+#include "include/School.hpp"
 
 int	main(void)
 {
-	// To start the program, we will first ask the teacher to fill in his/her information
-	// Then if they wants to to add a class
-	// Then the class should be the students' information,
-	// Then we will print a report of the class with the average score of the students.
-	// Defining a teacher
-	
+	// To start the program:
+	// 1- what is the name the school?
+// TODO:
+	// 2- the admin should be able to add teachers to the school, and each teacher should be able to add classes to their profile.
+	// 3- each class should have a subject and a list of students with their scores.
+	// 4- the admin should be able to print a report of each class with the average score of the students.
+	// 5- the admin should be able to print a report of each teacher with the classes they teach and the average score of the students in each class.
+	// 6- the admin should be able to print a report of the school with the teachers and their classes and the average score of the students in each class.
+	// 7- the admin should be able to exit the program.
+	// 8- the program should be able to handle invalid input and display appropriate error messages.
+	// 9- the program should be able to handle memory management and avoid memory leaks.
+	// 10- the program should be able to handle exceptions and display appropriate error messages.
+	// 11- the program should be able to handle edge cases and display appropriate error messages.
 
-	// to catch the teacher's information
-	string	firstName		= getValidName("Write your first name: ");
-	string	lastName		= getValidName("Write your Last name: ");
-	
-	// to build the teacher object with the information just caught
-	Teacher *teacher1;
-	
-	teacher1 = new Teacher(firstName, lastName);
-	
-	while (1)
-	{
-		string	prompt;
-		cout << "ADD to add a class, START to start the program, or EXIT to exit the program: ";
+	// to catch the school's information
+	string	schoolName	= getValidName("Write the name of your school: ");
+	School	school(schoolName);
+
+	while(1) {
+		std::cout << "START to build a school, REPORT to see stats, or EXIT to exit the program: ";
+		string prompt;
 		getline(cin, prompt);
-		if (prompt == "ADD")
+		if (prompt == "START")
 		{
-			string subject = getValidName("What is the subject of your class? ");
-			Classroom	classroom(subject);
-			teacher1->addClassroom(classroom);
-
-			while (1)
-			{
-				string studentName = getValidName("What is the name of the student? (or type 'DONE' to finish adding students) ");
-				if (studentName == "DONE")
-					break ;
-				int score = getValidNumber("What is the score of the student? ");
-				try {
-					Student student(studentName, score);
-					teacher1->addStudentToClassroom(student, teacher1->getClassrooms().size() - 1);
-					cout << GREEN << "Student added successfully!" << endl << RESET;
-				}
-				catch (const std::exception &e) {
-					cout << RED << "Error: " << e.what() << "Trying again..." << endl << RESET;
-				}
-			}
+			school.build();
 		}
-		else if (prompt == "START")
+		else if (prompt == "REPORT")
 		{
-			if (teacher1->getClassrooms().empty())
+			if (school.getTeachers().empty())
 			{
-				cout << "You don't have any class. Please add a class first." << endl;
+				cout << "No teachers in the school. Please add a teacher first." << endl;
 				continue ;
 			}
-			for (size_t i = 0; i < teacher1->getClassrooms().size(); i++)
-			{
-				cout << "Class " << i + 1 << ": " << teacher1->getClassrooms()[i].getSubject() << endl;
-				vector<Student> students = teacher1->getClassrooms()[i].getStudents();
-				if (students.empty())
-				{
-					cout << "No students in this class." << endl;
-					continue ;
-				}
-				double totalScore = 0.0;
-				for (size_t j = 0; j < students.size(); j++)
-				{
-					cout << "Student " << j + 1 << ": " << students[j].getName() << ", Score: " << students[j].getScore() << endl;
-					totalScore += students[j].getScore();
-				}
-				double averageScore = totalScore / students.size();
-				cout << "Average Score: " << averageScore << endl;
-			}
-			break ;
+			school.report();
 		}
 		else if (prompt == "EXIT")
 		{
-			break ;
+			return 0;
 		}
 		else
-			cout << "Invalid input. Please enter 'ADD' or 'START'." << endl;
+			cout << "Invalid input. Please enter 'START', 'REPORT', or 'EXIT'." << endl;
 	}
-	
-
-	delete teacher1;
 	return (0);
 }

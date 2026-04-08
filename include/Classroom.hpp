@@ -24,6 +24,8 @@ class Classroom
 		void addStudent(const Student &s);
 		vector<Student> getStudents() const;
 
+		double getAverageScore() const;
+
 };
 
 #endif
