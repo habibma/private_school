@@ -7,5 +7,5 @@ bool    isOnlyLetters(const string &s) {
         if (!isalpha(static_cast<unsigned char>(c)))
             return (false);
     }
-    return (!s.empty());
+    return (true);
 }

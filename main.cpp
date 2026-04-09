@@ -1,6 +1,19 @@
 #include "include/private_teacher.hpp"
 #include "include/Teacher.hpp"
 #include "include/School.hpp"
+#include "include/ui/buildSchool.hpp"
+
+
+void printReport(const School& school) {
+	std::cout << "School Name: " << school.getName() << std::endl;
+	for (const auto& teacher : school.getTeachers()) {
+		std::cout << "Teacher: " << teacher.getFirstName() << " " << teacher.getLastName() << std::endl;
+		for (const auto& classroom : teacher.getClassrooms()) {
+			std::cout << "  Classroom: " << classroom.getSubject() << std::endl;
+			std::cout << "    Average Score: " << classroom.getAverageScore() << std::endl;
+		}
+	}
+}
 
 int	main(void)
 {
@@ -23,12 +36,12 @@ int	main(void)
 	School	school(schoolName);
 
 	while(1) {
-		std::cout << "START to build a school, REPORT to see stats, or EXIT to exit the program: ";
+		std::cout << YELLOW << "START to build a school, REPORT to see stats, or EXIT to exit the program: " << RESET;
 		string prompt;
 		getline(cin, prompt);
 		if (prompt == "START")
 		{
-			school.build();
+			buildSchool(school);
 		}
 		else if (prompt == "REPORT")
 		{
@@ -37,7 +50,7 @@ int	main(void)
 				cout << "No teachers in the school. Please add a teacher first." << endl;
 				continue ;
 			}
-			school.report();
+			printReport(school);
 		}
 		else if (prompt == "EXIT")
 		{

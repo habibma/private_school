@@ -4,7 +4,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++11
 
 # Files
 INCLUDE_DIRS = -I./include
-SRC = main.cpp $(wildcard ./utils/*.cpp) $(wildcard ./src/*.cpp) $(wildcard ./helpers/*.cpp)
+SRC = main.cpp $(wildcard ./utils/*.cpp) $(wildcard ./src/*.cpp) $(wildcard ./src/ui/*.cpp) $(wildcard ./helpers/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 TARGET = program
 
@@ -20,6 +20,9 @@ $(TARGET): $(OBJ)
 # Header dependencies
 $(OBJ): include/private_teacher.hpp
 src/%.o: include/Teacher.hpp
+src/ui/%.o: include/ui/buildSchool.hpp
+utils/%.o: include/utils/utils.hpp
+helpers/%.o: include/helpers/helpers.hpp
 
 clean:
 	rm -f $(OBJ) $(TARGET)

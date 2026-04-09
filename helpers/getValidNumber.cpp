@@ -8,7 +8,11 @@ int	getValidNumber(const string &prompt)
 	{
 		cout << prompt;
 		if (cin >> num)
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			return (num);
+		}
 		else
 		{
 			cout << "Invalid input! Please enter a number.\n";

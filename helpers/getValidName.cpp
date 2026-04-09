@@ -10,6 +10,8 @@ string	getValidName(const string &prompt)
 			return (name);
 		} else {
 			cout << "Invalid input. Only letters are allowed.\n";
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 	}
 }

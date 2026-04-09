@@ -9,16 +9,13 @@ class School {
     public:
         School(const std::string& name);
         std::string getName() const;
-        void build();
-        void report() const;
-        const std::vector<Teacher>& getTeachers() const;
+        std::vector<Teacher>& getTeachers() const;
+        void addTeacher(const Teacher& teacher);
+
 
     private:
         std::string name;
         std::vector<Teacher> teachers;
-        void addTeacher();
-        void addClassroom();
-        //void addStudentToClassroom();
-};
+    };
 
 #endif
