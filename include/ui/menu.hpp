@@ -2,7 +2,7 @@
 #define MENU_HPP
 
 #include "../private_school.hpp"
-
+#include <iomanip>
 
 struct MenuOption {
 	string label;
