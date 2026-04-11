@@ -2,7 +2,7 @@
 #include "include/Teacher.hpp"
 #include "include/School.hpp"
 #include "include/ui/buildSchool.hpp"
-
+#include "include/ui/menu.hpp"
 
 void printReport(const School &school)
 {
@@ -35,35 +35,35 @@ int main(void)
 	// 11- the program should be able to handle edge cases and display appropriate error messages.
 
 	// to catch the school's information
-	cout << BOLD << "=== WELCOME TO THE SCHOOL MANAGEMENT SYSTEM ===\n" << RESET;
+	cout << BOLD << "=== WELCOME TO THE SCHOOL MANAGEMENT SYSTEM ===\n"
+		 << RESET;
 	string schoolName = getValidName("Write the name of your school: ");
 	School school(schoolName);
 
+	// options for the main menu
+	std::vector<MenuOption> mainMenu = {
+		{"START", "Start building your school"},
+		{"REPORT", "Show report"},
+		{"EXIT", "Exit"}};
+
 	while (1)
 	{
-		cout << BOLD << "\n=== MAIN MENU ===\n"
-				  << RESET;
-		cout << "1. " << GREEN << "START" << RESET << "  - Build a school\n";
-		cout << "2. " << CYAN << "REPORT" << RESET << " - Show statistics\n";
-		cout << "3. " << RED << "EXIT" << RESET << "   - Exit program\n";
-		cout << BOLD << "Choose an option \n" << RESET;
-		cout << "> ";
-		string prompt;
-		getline(cin, prompt);
-		if (prompt == "START")
+		int choice = showMenu("MAIN MENU", mainMenu);
+		if (choice == 1)
 		{
 			buildSchool(school);
 		}
-		else if (prompt == "REPORT")
+		else if (choice == 2)
 		{
 			if (school.getTeachers().empty())
 			{
-				cout << "No teachers in the school. Please add a teacher first." << endl;
+				cout << RED << "No teachers in the school. Please add a teacher first." << endl
+					 << RESET;
 				continue;
 			}
 			printReport(school);
 		}
-		else if (prompt == "EXIT")
+		else if (choice == 3)
 		{
 			return 0;
 		}
