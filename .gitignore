@@ -6,3 +6,4 @@
 *.tmp
 *.dSYM/
 build/
+program
