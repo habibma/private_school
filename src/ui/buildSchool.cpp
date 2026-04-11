@@ -14,8 +14,8 @@ void addTeacher(School &school)
 
 void editTeacher(Teacher &teacher)
 {
-    string firstName = getValidName("Write the teacher's new first name: (or press Enter to keep the current name) ");
-    string lastName = getValidName("Write the teacher's new last name: (or press Enter to keep the current name) ");
+    string firstName = getValidName("Write the teacher's new first name (or press Enter to keep the current name): ");
+    string lastName = getValidName("Write the teacher's new last name (or press Enter to keep the current name): ");
     teacher.setFirstName(firstName);
     teacher.setLastName(lastName);
     cout << GREEN << "Teacher information updated successfully!" << endl
@@ -35,10 +35,12 @@ void addStudentToClassroom(Teacher &teacher)
 {
     if (teacher.getClassrooms().empty())
     {
-        cout << "No classrooms available. Please add a classroom first." << endl;
+        cout << RED << "No classrooms available. Please add a classroom first." << endl
+             << RESET;
         return ;
     }
-    cout << "Select a classroom to add a student to:" << endl;
+    cout << BOLD << "Select a classroom to add a student to:" << endl
+        << RESET;
     for (size_t i = 0; i < teacher.getClassrooms().size(); ++i)
     {
         cout << i + 1 << ". " << teacher.getClassrooms()[i].getSubject() << endl;
@@ -64,11 +66,13 @@ void manageTeacher(Teacher &teacher)
 {
     while (1)
     {
-        std::cout << YELLOW << "EDIT to edit the teacher's information, \n"
-                  << "ADD_CLASS to add a class to the teacher's profile,\n"
-                  << "ADD_STUDENT to add a student to a class,\n"
-                  << "DELETE to delete the teacher from the school,\n"
-                  << "and BACK to go back to the previous menu: " << RESET;
+        cout << BOLD << "\n=== MANAGE TEACHER ===\n" << RESET;
+        cout << "1. " << GREEN << "EDIT" << RESET << " - Edit teacher's information\n"
+             << "2. " << CYAN << "ADD_CLASS" << RESET << " - Add a classroom to the teacher's profile\n"
+             << "3. " << YELLOW << "ADD_STUDENT" << RESET << " - Add a student to a classroom\n"
+             << "4. " << RED << "DELETE" << RESET << " - Delete the teacher from the school\n"
+             << "5. BACK - Go back to the previous menu\n"
+             << "> ";
         string prompt;
         getline(cin, prompt);
         if (prompt == "EDIT")
@@ -99,7 +103,9 @@ void manageTeacher(Teacher &teacher)
         }
         else
         {
-            cout << "Invalid input. Please enter 'EDIT', 'ADD_CLASS', 'ADD_STUDENT', 'DELETE', or 'BACK'." << endl;
+            cout << RED << "Invalid input " << RESET
+                        << "Please enter 'EDIT', 'ADD_CLASS', 'ADD_STUDENT', 'DELETE', or 'BACK'." << endl;
+
         }
     }
 }
@@ -110,7 +116,12 @@ void buildSchool(School &school)
     // ADD to add a teacher, Manage to manage teachers, and BACK to go back to the main menu
     while (1)
     {
-        std::cout << YELLOW << "ADD to add a teacher, MANAGE to manage teachers, and BACK to go back to the main menu: " << RESET;
+        cout << BOLD << "\n=== BUILD SCHOOL ===\n" << RESET
+             << "1. " << GREEN << "ADD" << RESET << "    - Add a teacher to the school\n"
+             << "2. " << CYAN << "MANAGE" << RESET << " - Manage teachers\n"
+             << "3. " << RED << "BACK" << RESET << "   - Go back to the main menu\n"
+             << BOLD << "Choose an option \n" << RESET
+             << "> ";
         string prompt;
         getline(cin, prompt);
         if (prompt == "ADD")
@@ -118,7 +129,7 @@ void buildSchool(School &school)
         else if (prompt == "MANAGE")
         {
             // Edit a teacher's information; for now, we will only allow editing the teacher's name
-            cout << "Your school has " << school.getTeachers().size() << " teacher(s)." << endl;
+            cout << "\nYour school has " << school.getTeachers().size() << " teacher(s)." << endl;
             for (size_t i = 0; i < school.getTeachers().size(); ++i)
             {
                 cout << i + 1 << ". " << school.getTeachers()[i].getFirstName() << " " << school.getTeachers()[i].getLastName() << endl;
@@ -127,7 +138,7 @@ void buildSchool(School &school)
             int teacherIndex = getValidNumber("Enter the number of the teacher you want to manage (or 0 to go back): ") - 1;
             if (teacherIndex == -1)
             {
-                return ;
+                continue;
             }
             if (teacherIndex < 0 || static_cast<size_t>(teacherIndex) >= school.getTeachers().size())
             {

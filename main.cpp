@@ -4,22 +4,25 @@
 #include "include/ui/buildSchool.hpp"
 
 
-void printReport(const School& school) {
-	std::cout << "School Name: " << school.getName() << std::endl;
-	for (const auto& teacher : school.getTeachers()) {
-		std::cout << "Teacher: " << teacher.getFirstName() << " " << teacher.getLastName() << std::endl;
-		for (const auto& classroom : teacher.getClassrooms()) {
-			std::cout << "  Classroom: " << classroom.getSubject() << std::endl;
-			std::cout << "    Average Score: " << classroom.getAverageScore() << std::endl;
+void printReport(const School &school)
+{
+	cout << "School Name: " << school.getName() << std::endl;
+	for (const auto &teacher : school.getTeachers())
+	{
+		cout << "Teacher: " << teacher.getFirstName() << " " << teacher.getLastName() << std::endl;
+		for (const auto &classroom : teacher.getClassrooms())
+		{
+			cout << "  Classroom: " << classroom.getSubject() << std::endl;
+			cout << "    Average Score: " << classroom.getAverageScore() << std::endl;
 		}
 	}
 }
 
-int	main(void)
+int main(void)
 {
 	// To start the program:
 	// 1- what is the name the school?
-// TODO:
+	// TODO:
 	// 2- the admin should be able to add teachers to the school, and each teacher should be able to add classes to their profile.
 	// 3- each class should have a subject and a list of students with their scores.
 	// 4- the admin should be able to print a report of each class with the average score of the students.
@@ -32,11 +35,19 @@ int	main(void)
 	// 11- the program should be able to handle edge cases and display appropriate error messages.
 
 	// to catch the school's information
-	string	schoolName	= getValidName("Write the name of your school: ");
-	School	school(schoolName);
+	cout << BOLD << "=== WELCOME TO THE SCHOOL MANAGEMENT SYSTEM ===\n" << RESET;
+	string schoolName = getValidName("Write the name of your school: ");
+	School school(schoolName);
 
-	while(1) {
-		std::cout << YELLOW << "START to build a school, REPORT to see stats, or EXIT to exit the program: " << RESET;
+	while (1)
+	{
+		cout << BOLD << "\n=== MAIN MENU ===\n"
+				  << RESET;
+		cout << "1. " << GREEN << "START" << RESET << "  - Build a school\n";
+		cout << "2. " << CYAN << "REPORT" << RESET << " - Show statistics\n";
+		cout << "3. " << RED << "EXIT" << RESET << "   - Exit program\n";
+		cout << BOLD << "Choose an option \n" << RESET;
+		cout << "> ";
 		string prompt;
 		getline(cin, prompt);
 		if (prompt == "START")
@@ -48,7 +59,7 @@ int	main(void)
 			if (school.getTeachers().empty())
 			{
 				cout << "No teachers in the school. Please add a teacher first." << endl;
-				continue ;
+				continue;
 			}
 			printReport(school);
 		}
@@ -57,7 +68,8 @@ int	main(void)
 			return 0;
 		}
 		else
-			cout << "Invalid input. Please enter 'START', 'REPORT', or 'EXIT'." << endl;
+			cout << RED << "Invalid input. Please enter 'START', 'REPORT', or 'EXIT'." << endl
+				 << RESET;
 	}
 	return (0);
 }

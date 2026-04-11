@@ -6,7 +6,8 @@ int	getValidNumber(const string &prompt)
 
 	while (true)
 	{
-		cout << prompt;
+		cout << prompt << endl
+			 << "> ";
 		if (cin >> num)
 		{
 			cin.clear();

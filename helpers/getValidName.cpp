@@ -4,7 +4,8 @@ string	getValidName(const string &prompt)
 {
 	string	name;
 	while (true) {
-		cout << prompt;
+		cout << prompt << endl
+			 << "> ";
 		getline(cin, name);
 		if (isOnlyLetters(name)) {
 			return (name);
