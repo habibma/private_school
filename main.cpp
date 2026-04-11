@@ -1,4 +1,4 @@
-#include "include/private_teacher.hpp"
+#include "include/private_school.hpp"
 #include "include/Teacher.hpp"
 #include "include/School.hpp"
 #include "include/ui/buildSchool.hpp"

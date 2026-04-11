@@ -18,7 +18,7 @@ $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(INCLUDE_DIRS) -c $< -o $@
 
 # Header dependencies
-$(OBJ): include/private_teacher.hpp
+$(OBJ): include/private_school.hpp
 src/%.o: include/Teacher.hpp
 src/ui/%.o: include/ui/buildSchool.hpp
 utils/%.o: include/utils/utils.hpp

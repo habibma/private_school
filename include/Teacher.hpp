@@ -1,7 +1,6 @@
 #ifndef TEACHER_HPP
 # define TEACHER_HPP
 
-#include "private_teacher.hpp"
 #include "Classroom.hpp"
 #include "Student.hpp"
 

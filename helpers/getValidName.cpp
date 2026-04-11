@@ -1,4 +1,4 @@
-#include "../include/private_teacher.hpp"
+#include "../include/private_school.hpp"
 
 string	getValidName(const string &prompt)
 {

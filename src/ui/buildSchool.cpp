@@ -1,3 +1,4 @@
+#include "../../include/private_school.hpp"
 #include "../../include/ui/buildSchool.hpp"
 
 // Add a teacher to the school
