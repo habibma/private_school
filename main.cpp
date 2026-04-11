@@ -49,27 +49,26 @@ int main(void)
 	while (1)
 	{
 		int choice = showMenu("MAIN MENU", mainMenu);
-		if (choice == 1)
+		switch (choice)
 		{
-			buildSchool(school);
-		}
-		else if (choice == 2)
-		{
-			if (school.getTeachers().empty())
-			{
-				cout << RED << "No teachers in the school. Please add a teacher first." << endl
+			case 1:
+				buildSchool(school);
+				break;
+			case 2:
+				if (school.getTeachers().empty())
+				{
+					cout << RED << "No teachers in the school. Please add a teacher first." << endl
+						 << RESET;
+					continue;
+				}
+				printReport(school);
+				break;
+			case 3:
+				return 0;
+			default:
+				cout << RED << "Invalid input. Please enter 'START', 'REPORT', or 'EXIT'." << endl
 					 << RESET;
-				continue;
-			}
-			printReport(school);
 		}
-		else if (choice == 3)
-		{
-			return 0;
-		}
-		else
-			cout << RED << "Invalid input. Please enter 'START', 'REPORT', or 'EXIT'." << endl
-				 << RESET;
 	}
 	return (0);
 }
