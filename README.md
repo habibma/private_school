@@ -1,6 +1,6 @@
-# Private Teacher 🧑‍🏫
+# Praivate School 🧑‍🏫
 
-**Private Teacher** is a C++ console program designed to help manage a private school structure.  
+**Praivate School** is a C++ console program designed to help manage a private school structure.  
 It now supports building a school, adding teachers, managing teacher profiles, creating classrooms, adding students, and printing a school report with class averages.
 
 ## ✨ Features
