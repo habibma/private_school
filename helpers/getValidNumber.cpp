@@ -15,7 +15,7 @@ int	getValidNumber(const string &prompt)
 		}
 		else
 		{
-			cout << "Invalid input! Please enter a number.\n";
+			cout << RED << "Invalid input! Please enter a number.\n" << RESET;
 			cin.clear();
             cin.ignore(1000, '\n');
 		}
