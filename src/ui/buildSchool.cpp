@@ -123,48 +123,6 @@ void buildSchool(School &school)
 
     while (!shouldExit)
     {
-<<<<<<< HEAD
-        int choice = showMenu("BUILD SCHOOL", buildMenu);
-        switch (choice)
-        {
-            case 1:
-                addTeacher(school);
-                break;
-            case 2:
-            {
-
-                // Edit a teacher's information; for now, we will only allow editing the teacher's name
-                cout << "\nYour school has " << school.getTeachers().size() << " teacher(s)." << endl;
-                for (size_t i = 0; i < school.getTeachers().size(); ++i)
-                {
-                    cout << i + 1 << ". " << school.getTeachers()[i].getFirstName() << " " << school.getTeachers()[i].getLastName() << endl;
-                }
-                // Get the teacher index from the user or return to the previous menu
-                int teacherIndex = getValidNumber("Enter the number of the teacher you want to manage (or 0 to go back): ") - 1;
-                if (teacherIndex == -1)
-                {
-                    continue;
-                }
-                if (teacherIndex < 0 || static_cast<size_t>(teacherIndex) >= school.getTeachers().size())
-                {
-                    cout << RED << "Invalid teacher number. Please try again." << endl
-                         << RESET;
-                    continue;
-                }
-                Teacher &teacher = school.getTeachers()[teacherIndex];
-                // CRUD operations for the teacher
-                manageTeacher(teacher);
-                break;
-            }
-            case 3:
-                return ;
-            default:
-                cout << RED << "Invalid input.\n"
-                     << RESET
-                     << YELLOW << "Please enter 'ADD', 'MANAGE', or 'BACK'." << RESET << endl; 
-        }
-=======
         menu.display();
->>>>>>> feature/menu-ui
     }
 }
