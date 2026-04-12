@@ -56,31 +56,7 @@ int main(void)
 
 	while (true)
 	{
-<<<<<<< HEAD
-		int choice = showMenu("MAIN MENU", mainMenu);
-		switch (choice)
-		{
-			case 1:
-				buildSchool(school);
-				break;
-			case 2:
-				if (school.getTeachers().empty())
-				{
-					cout << RED << "No teachers in the school. Please add a teacher first." << endl
-						 << RESET;
-					continue;
-				}
-				printReport(school);
-				break;
-			case 3:
-				return 0;
-			default:
-				cout << RED << "Invalid input. Please enter 'START', 'REPORT', or 'EXIT'." << endl
-					 << RESET;
-		}
-=======
 		menu.display();
->>>>>>> feature/menu-ui
 	}
 	return (0);
 }
