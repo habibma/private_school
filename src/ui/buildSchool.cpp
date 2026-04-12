@@ -7,7 +7,11 @@ void addTeacher(School &school)
 {
     string firstName = getValidName("Write the teacher's first name: ");
     string lastName = getValidName("Write the teacher's last name: ");
-    Teacher teacher(firstName, lastName);
+    int age = getValidNumber("Write the teacher's age: ");
+    string phoneNumber = getValidPhoneNumber("Write the teacher's phone number: ");
+    string email = getValidEmail("Write the teacher's email: ");
+    Demographics demographics{firstName, lastName, age, phoneNumber, email};
+    Teacher teacher(demographics);
     school.addTeacher(teacher);
     cout << GREEN << "Teacher added successfully!" << endl
          << RESET;
@@ -16,9 +20,28 @@ void addTeacher(School &school)
 void editTeacher(Teacher &teacher)
 {
     string firstName = getValidName("Write the teacher's new first name (or press Enter to keep the current name): ");
+    if (firstName.empty())
+        firstName = teacher.getDemographics().firstName;
     string lastName = getValidName("Write the teacher's new last name (or press Enter to keep the current name): ");
-    teacher.setFirstName(firstName);
-    teacher.setLastName(lastName);
+    if (lastName.empty())
+        lastName = teacher.getDemographics().lastName;
+    int age = getValidNumber("Write the teacher's new age (or press Enter to keep the current age): ");
+    if (age == 0)
+        age = teacher.getDemographics().age;
+    string phoneNumber = getValidPhoneNumber("Write the teacher's new phone number (or press Enter to keep the current phone number): ");
+    if (phoneNumber.empty())
+        phoneNumber = teacher.getDemographics().phoneNumber;
+    string email = getValidEmail("Write the teacher's new email (or press Enter to keep the current email): ");
+    if (email.empty())
+        email = teacher.getDemographics().email;
+    if (firstName.empty() && lastName.empty() && age == 0 && phoneNumber.empty() && email.empty())
+    {
+        cout << YELLOW << "No changes made to the teacher's information." << endl
+             << RESET;
+        return;
+    }
+    Demographics demographics{firstName, lastName, age, phoneNumber, email};
+    teacher.setDemographics(demographics);
     cout << GREEN << "Teacher information updated successfully!" << endl
          << RESET;
 }
@@ -66,12 +89,12 @@ void manageTeacher(Teacher &teacher)
     bool shouldExit = false;
     vector<MenuOption> manageMenu = {
         {"EDIT", "Edit the teacher's information", [&teacher]() { editTeacher(teacher); }},
-        {"ADD_CLASS", "Add a classroom to the teacher's profile", [&teacher]() { addClassroom(teacher); }},
-        {"ADD_STUDENT", "Add a student to one of the teacher's classrooms", [&teacher]() { addStudentToClassroom(teacher); }},
-        {"BACK", "Go back to the previous menu", [&shouldExit]() { shouldExit = true; }}
+        {"ADD CLASS", "Add a classroom to the teacher's profile", [&teacher]() { addClassroom(teacher); }},
+        {"ADD STUDENT", "Add a student to one of the teacher's classrooms", [&teacher]() { addStudentToClassroom(teacher); }},
+        {"BACK", "Go back to the teachers", [&shouldExit]() { shouldExit = true; }}
     };
 
-    Menu menu("MANAGE TEACHER", manageMenu);
+    Menu menu("TEACHER MANAGEMENT", manageMenu);
 
     while (!shouldExit)
     {
@@ -90,7 +113,8 @@ void manageTeachers(School &school)
              << RESET;
         for (size_t i = 0; i < school.getTeachers().size(); ++i)
         {
-            cout << i + 1 << ". " << school.getTeachers()[i].getFirstName() << " " << school.getTeachers()[i].getLastName() << endl;
+            Demographics demographics = school.getTeachers()[i].getDemographics();
+            cout << i + 1 << ". " << demographics.firstName << " " << demographics.lastName << endl;
         }
         int teacherIndex = getValidNumber("Enter the number of the teacher you want to manage (or 0 to go back): ") - 1;
         if (teacherIndex == -1)
@@ -114,12 +138,12 @@ void buildSchool(School &school)
 {
     bool shouldExit = false;
     vector<MenuOption> buildMenu = {
-        {"ADD", "Add a teacher to the school", [&school]() { addTeacher(school); }},
-        {"MANAGE", "Manage teachers", [&school]() { manageTeachers(school); }},
+        {"ADD TEACHER", "Add a teacher to the school", [&school]() { addTeacher(school); }},
+        {"MANAGE TEACHERS", "Manage teachers", [&school]() { manageTeachers(school); }},
         {"BACK", "Go back to the main menu", [&shouldExit]() { shouldExit = true; }}
     };
 
-    Menu menu("BUILD SCHOOL", buildMenu);
+    Menu menu("SCHOOL SETUP", buildMenu);
 
     while (!shouldExit)
     {

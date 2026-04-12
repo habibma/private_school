@@ -19,9 +19,12 @@ using namespace std;
 
 // Function declaration
 bool    isOnlyLetters(const string &s);
+bool    isOnlyDigits(const string &s);
 
 // helper functions
 string	getValidName(const string &prompt);
 int		getValidNumber(const string &prompt);
+string	getValidPhoneNumber(const string &prompt);
+string  getValidEmail(const string &prompt);
 
 #endif
