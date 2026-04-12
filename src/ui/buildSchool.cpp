@@ -75,33 +75,6 @@ void manageTeacher(Teacher &teacher)
 
     while (!shouldExit)
     {
-<<<<<<< HEAD
-        int choice = showMenu("MANAGE TEACHER", manageMenu);
-        switch (choice)
-        {
-            case 1:
-                editTeacher(teacher);
-                break;
-            case 2:
-                addClassroom(teacher);
-                break;
-            case 3:
-                addStudentToClassroom(teacher);
-                break;
-            case 4:
-                // To delete the teacher from the school, we will set the teacher's first name and last name to an empty string and clear their classrooms vector
-                teacher.setFirstName("");
-                teacher.setLastName("");
-                teacher.getClassrooms().clear();
-                cout << GREEN << "Teacher deleted successfully!" << endl
-                     << RESET;
-                return;
-            case 5:
-                return;
-            default:
-                cout << RED << "Invalid input " << RESET
-                     << "Please enter 'EDIT', 'ADD_CLASS', 'ADD_STUDENT', 'DELETE', or 'BACK'." << endl; 
-=======
         menu.display();
     }
 }
@@ -129,7 +102,6 @@ void manageTeachers(School &school)
             cout << RED << "Invalid teacher number. Please try again." << endl
                  << RESET;
             continue;
->>>>>>> feature/menu-ui
         }
         Teacher &teacher = school.getTeachers()[teacherIndex];
         // manage the selected teacher
