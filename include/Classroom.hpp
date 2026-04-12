@@ -18,12 +18,12 @@ class Classroom
 		Classroom(string subject);
 		~Classroom();
 
-		void setSubject(const string &subject);
 		string getSubject() const;
-
-		void addStudent(const Student &s);
 		vector<Student> getStudents() const;
 
+		void setSubject(const string &subject);
+
+		void addStudent(const Student &s);
 		double getAverageScore() const;
 
 };

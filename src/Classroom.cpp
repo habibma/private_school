@@ -1,14 +1,19 @@
 #include "../include/Classroom.hpp"
 
+// constructors and destructor
 Classroom::Classroom(string subject) : _subject(subject) {}
 Classroom::Classroom() : _subject("") {}
 Classroom::~Classroom() {}
 
-void Classroom::setSubject(const string &subject) { _subject = subject; }
+// getters
 string Classroom::getSubject() const { return (_subject); }
-
-void Classroom::addStudent(const Student &s) { students.push_back(s); }
 vector<Student> Classroom::getStudents() const { return (students); }
+
+// setters
+void Classroom::setSubject(const string &subject) { _subject = subject; }
+
+// other methods
+void Classroom::addStudent(const Student &s) { students.push_back(s); }
 
 double Classroom::getAverageScore() const {
     if (students.empty()) {

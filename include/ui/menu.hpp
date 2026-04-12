@@ -3,13 +3,22 @@
 
 #include "../private_school.hpp"
 #include <iomanip>
+#include <functional>
 
 struct MenuOption {
 	string label;
 	string description;
+    std::function<void()> action;
 };
 
-int showMenu(const std::string& title,
-             const std::vector<MenuOption>& options);
+class Menu {
+    public:
+        Menu(const std::string& title, const std::vector<MenuOption>& options);
+        void    display() const;
+
+    private:
+        std::string title;
+        std::vector<MenuOption> options;
+};
 
 #endif

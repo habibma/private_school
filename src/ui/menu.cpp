@@ -1,24 +1,31 @@
 #include "../../include/ui/menu.hpp"
 
-int showMenu(const string& title,
-             const vector<MenuOption>& options)
+Menu::Menu(const std::string &title, const std::vector<MenuOption> &options)
+    : title(title), options(options) {}
+
+void Menu::display() const
 {
-    while (true) {
+    while (true)
+    {
         cout << "\n=== " << title << " ===\n";
 
-        for (size_t i = 0; i < options.size(); ++i) {
+        for (size_t i = 0; i < options.size(); ++i)
+        {
             cout << i + 1 << ". " << setw(10) << left << options[i].label
-            << " - " << options[i].description
-            << "\n";
+                 << " - " << options[i].description
+                 << "\n";
         }
 
         cout << "> ";
 
         int choice;
-        if (cin >> choice) {
-            if (choice >= 1 && choice <= (int)options.size()) {
+        if (cin >> choice)
+        {
+            if (choice >= 1 && choice <= (int)options.size())
+            {
                 cin.ignore(1000, '\n');
-                return choice;
+                options[choice - 1].action();
+                return;
             }
         }
 
@@ -26,5 +33,4 @@ int showMenu(const string& title,
         cin.clear();
         cin.ignore(1000, '\n');
     }
-    return -1; // This line will never be reached, but it prevents a compiler warning.
 }
