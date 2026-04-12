@@ -15,7 +15,8 @@ void printReport(const School &school)
 	cout << "School Name: " << school.getName() << std::endl;
 	for (const auto &teacher : school.getTeachers())
 	{
-		cout << "Teacher: " << teacher.getFirstName() << " " << teacher.getLastName() << std::endl;
+		const auto &demographics = teacher.getDemographics();
+		cout << "Teacher: " << demographics.getFullName() << std::endl;
 		for (const auto &classroom : teacher.getClassrooms())
 		{
 			cout << "  Classroom: " << classroom.getSubject() << std::endl;
@@ -48,8 +49,8 @@ int main(void)
 
 	// options for the main menu
 	std::vector<MenuOption> mainMenu = {
-		{"START", "Start building your school", [&school]() mutable { buildSchool(school); }},
-		{"REPORT", "Show report", [&school]() { printReport(school); }},
+		{"SETUP SCHOOL", "Configure your school", [&school]() mutable { buildSchool(school); }},
+		{"VIEW REPORT", "View the school report", [&school]() { printReport(school); }},
 		{"EXIT", "Exit", []() { exit(0); }}};
 
 	Menu menu("MAIN MENU", mainMenu);

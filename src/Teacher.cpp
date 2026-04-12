@@ -2,38 +2,34 @@
 #include "../include/Classroom.hpp"
 #include "../include/Student.hpp"
 
-Teacher::Teacher() : firstName(""), lastName("") {}
+Teacher::Teacher() {}
 Teacher::~Teacher() {}
-Teacher::Teacher(const Teacher &other) : firstName(other.firstName), lastName(other.lastName), classrooms(other.classrooms) {}
+Teacher::Teacher(const Teacher &other) : _demographics(other._demographics), _classrooms(other._classrooms) {
+	_id = other._id;
+}
 Teacher &Teacher::operator=(const Teacher &other)
 {
 	if (this != &other)
 	{
-		firstName = other.firstName;
-		lastName = other.lastName;
-		classrooms = other.classrooms;
+		_demographics = other._demographics;
+		_classrooms = other._classrooms;
+		_id = other._id;
 	}
 	return (*this);
 }
-Teacher::Teacher(const string &firstName, const string &lastName) : firstName(firstName), lastName(lastName) {}
+Teacher::Teacher(Demographics demographics) : _demographics(demographics), _classrooms() {}
 
-//setters
-void Teacher::setFirstName(const string &firstName)
-{
-	this->firstName = firstName;
-}
-void Teacher::setLastName(const string &lastName)
-{
-	this->lastName = lastName;
-}
+// setters
+void Teacher::setDemographics(Demographics demographics) { this->_demographics = demographics; }
 
-void Teacher::addClassroom(const Classroom &c) { classrooms.push_back(c); }
+void Teacher::addClassroom(const Classroom &c) { this->_classrooms.push_back(c); }
 
 void Teacher::addStudentToClassroom(const Student &s, unsigned int classroomIndex)
 {
-		classrooms[classroomIndex].addStudent(s);
+	this->_classrooms[classroomIndex].addStudent(s);
 }
-//getters
-string Teacher::getFirstName() const { return (firstName); }
-string Teacher::getLastName() const { return (lastName); }
-vector<Classroom> Teacher::getClassrooms() const { return (classrooms); }
+
+// getters
+Demographics Teacher::getDemographics() const { return (this->_demographics); }
+
+vector<Classroom> Teacher::getClassrooms() const { return (this->_classrooms); }

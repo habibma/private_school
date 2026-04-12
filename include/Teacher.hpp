@@ -4,29 +4,42 @@
 #include "Classroom.hpp"
 #include "Student.hpp"
 
+// todo later: make phone number a string to handle different formats and country codes
+struct Demographics
+{
+	string	firstName;
+	string	lastName;
+	int		age;
+	string	phoneNumber;
+	string	email;
+
+	//getters
+	string getFullName() const { return firstName + " " + lastName; }
+};
+
 class Teacher
 {
 	private:
-		string			firstName;
-		string			lastName;
-		vector<Classroom>	classrooms;
+		Demographics		_demographics;
+		int					_id;
+		vector<Classroom>	_classrooms;
+		Teacher();
 
 	public:
-		Teacher();
 		~Teacher();
 		Teacher(const Teacher &other);
 		Teacher &operator=(const Teacher &other);
-		Teacher(const string &firstName, const string &lastName);
+		Teacher(Demographics demographics);
 
-		void setFirstName(const string &firstName);
-		void setLastName(const string &lastName);
+		void setDemographics(Demographics demographics);
 
 		void addClassroom(const Classroom &classroom);
 		void addStudentToClassroom(const Student &s, unsigned int classroomIndex);
 
-		string getFirstName() const;
-		string getLastName() const;
+		Demographics getDemographics() const;
+
 		vector<Classroom> getClassrooms() const;
+
 };
 
 #endif
