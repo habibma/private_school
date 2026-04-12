@@ -18,6 +18,7 @@ class Student
 		//getters
 		string getName() const;
 		double getScore() const;
+
 };
 
 #endif

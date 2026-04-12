@@ -48,8 +48,8 @@ int main(void)
 
 	// options for the main menu
 	std::vector<MenuOption> mainMenu = {
-		{"START", "Start building your school", [school]() mutable { buildSchool(school); }},
-		{"REPORT", "Show report", [school]() { printReport(school); }},
+		{"START", "Start building your school", [&school]() mutable { buildSchool(school); }},
+		{"REPORT", "Show report", [&school]() { printReport(school); }},
 		{"EXIT", "Exit", []() { exit(0); }}};
 
 	Menu menu("MAIN MENU", mainMenu);
