@@ -6,6 +6,12 @@
 
 void printReport(const School &school)
 {
+	if (school.getTeachers().empty())
+	{
+		cout << YELLOW << "No teachers in the school yet. Please add teachers to see the report." << RESET << endl;
+		return;
+	}
+
 	cout << "School Name: " << school.getName() << std::endl;
 	for (const auto &teacher : school.getTeachers())
 	{
@@ -42,34 +48,15 @@ int main(void)
 
 	// options for the main menu
 	std::vector<MenuOption> mainMenu = {
-		{"START", "Start building your school"},
-		{"REPORT", "Show report"},
-		{"EXIT", "Exit"}};
+		{"START", "Start building your school", [school]() mutable { buildSchool(school); }},
+		{"REPORT", "Show report", [school]() { printReport(school); }},
+		{"EXIT", "Exit", []() { exit(0); }}};
 
-	while (1)
+	Menu menu("MAIN MENU", mainMenu);
+
+	while (true)
 	{
-		int choice = showMenu("MAIN MENU", mainMenu);
-		if (choice == 1)
-		{
-			buildSchool(school);
-		}
-		else if (choice == 2)
-		{
-			if (school.getTeachers().empty())
-			{
-				cout << RED << "No teachers in the school. Please add a teacher first." << endl
-					 << RESET;
-				continue;
-			}
-			printReport(school);
-		}
-		else if (choice == 3)
-		{
-			return 0;
-		}
-		else
-			cout << RED << "Invalid input. Please enter 'START', 'REPORT', or 'EXIT'." << endl
-				 << RESET;
+		menu.display();
 	}
 	return (0);
 }
