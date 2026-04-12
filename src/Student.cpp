@@ -7,6 +7,8 @@ Student::Student(string name, double score) {
         throw invalid_argument("Name cannot be empty.");
     if (score < 0 || score > 100)
         throw invalid_argument("Score must be between 0 and 100.");
+    _name = name;
+    _score = score;
 }
 Student::~Student() {}
 
