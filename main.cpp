@@ -6,22 +6,29 @@
 
 void printReport(const School &school)
 {
-	if (school.getTeachers().empty())
+	if (school.getClassrooms().empty())
 	{
-		cout << YELLOW << "No teachers in the school yet. Please add teachers to see the report." << RESET << endl;
+		cout << YELLOW << "No classrooms in the school yet. Please add classrooms to see the report." << RESET << endl;
 		return;
 	}
 
 	cout << "School Name: " << school.getName() << std::endl;
-	for (const auto &teacher : school.getTeachers())
+	for (const auto &classroom : school.getClassrooms())
 	{
-		const auto &demographics = teacher.getDemographics();
-		cout << "Teacher: " << demographics.getFullName() << std::endl;
-		for (const auto &classroom : teacher.getClassrooms())
+		cout << "Classroom Subject: " << classroom.getSubject() << std::endl;
+		if (classroom.getStudents().empty())
 		{
-			cout << "  Classroom: " << classroom.getSubject() << std::endl;
-			cout << "    Average Score: " << classroom.getAverageScore() << std::endl;
+			cout << YELLOW << "No students in this classroom yet." << RESET << endl;
+			continue;
 		}
+		double totalScore = 0;
+		for (const auto &student : classroom.getStudents())
+		{
+			cout << "  Student Name: " << student.getName() << ", Score: " << student.getScore() << std::endl;
+			totalScore += student.getScore();
+		}
+		double averageScore = totalScore / classroom.getStudents().size();
+		cout << "  Average Score: " << averageScore << std::endl;
 	}
 }
 
@@ -30,7 +37,7 @@ int main(void)
 	// To start the program:
 	// 1- what is the name the school?
 	// TODO:
-	// 2- the admin should be able to add teachers to the school, and each teacher should be able to add classes to their profile.
+	// 2- the admin should be able to add classrooms to the school
 	// 3- each class should have a subject and a list of students with their scores.
 	// 4- the admin should be able to print a report of each class with the average score of the students.
 	// 5- the admin should be able to print a report of each teacher with the classes they teach and the average score of the students in each class.
@@ -44,6 +51,12 @@ int main(void)
 	// to catch the school's information
 	cout << BOLD << "=== WELCOME TO THE SCHOOL MANAGEMENT SYSTEM ===\n"
 		 << RESET;
+
+	// for the first time the program runs, the school will be empty and the admin will have to add classrooms and students to the school before being able to print any reports. The main menu will have an option to setup the school, which will allow the admin to add classrooms and students to the school. Once the school is set up, the admin can choose to print reports or exit the program.	
+	if (true)
+	{
+		cout << YELLOW << "It looks like this is your first time running the program. Let's set up your school!" << RESET << endl;
+	}
 	string schoolName = getValidName("Write the name of your school: ");
 	School school(schoolName);
 

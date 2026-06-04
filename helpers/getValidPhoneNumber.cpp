@@ -7,7 +7,7 @@ string	getValidPhoneNumber(const string &prompt)
         cout << prompt << endl
              << "> ";
         getline(cin, phoneNumber);
-        if (isOnlyDigits(phoneNumber)) {
+        if (!phoneNumber.empty() && isOnlyDigits(phoneNumber)) {
             return (phoneNumber);
         } else {
             cout << "Invalid input. Only digits are allowed.\n";

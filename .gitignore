@@ -1,4 +1,6 @@
 *.o
+*.obj
+*.d
 *.out
 *.exe
 *.log

@@ -2,21 +2,23 @@
 # define STUDENT_HPP
 
 #include <string>
-using namespace std;
 
 class Student
 {
 	private:
-		string _name;
+		std::string _name;
 		double _score;
 		Student();
 
 	public:
-		Student(string name, double score);
+		Student(std::string name);
+		Student(std::string name, double score);
+		Student(const Student &other);
+		Student &operator=(const Student &other);
 		~Student();
 
 		//getters
-		string getName() const;
+		std::string getName() const;
 		double getScore() const;
 
 };

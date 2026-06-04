@@ -1,17 +1,28 @@
 #include "../include/School.hpp"
 #include "../include/Classroom.hpp"
 
-School::School(const std::string& name) : name(name) {}
+School::School() = default;
+School::School(const std::string& name) : _name(name) {}
+School::School(const School& other) = default;
+School& School::operator=(const School& other) = default;
+School::~School() = default;
 
 
 // getters
 std::string School::getName() const {
-    return name;
+    return _name;
 }
-std::vector<Teacher>& School::getTeachers() const {
-    return const_cast<std::vector<Teacher>&>(teachers);
+std::vector<Classroom>& School::getClassrooms() {
+    return _classrooms;
+}
+const std::vector<Classroom>& School::getClassrooms() const {
+    return _classrooms;
+}
+std::vector<Student> School::getStudents() const {
+    return _students;
 }
 
-void School::addTeacher(const Teacher& teacher) {
-    teachers.push_back(teacher);
+// setters
+void School::addClassroom(const Classroom& classroom) {
+    _classrooms.push_back(classroom);
 }

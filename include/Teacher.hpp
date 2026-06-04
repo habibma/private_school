@@ -22,7 +22,6 @@ class Teacher
 	private:
 		Demographics		_demographics;
 		int					_id;
-		vector<Classroom>	_classrooms;
 		Teacher();
 
 	public:
@@ -33,12 +32,7 @@ class Teacher
 
 		void setDemographics(Demographics demographics);
 
-		void addClassroom(const Classroom &classroom);
-		void addStudentToClassroom(const Student &s, unsigned int classroomIndex);
-
 		Demographics getDemographics() const;
-
-		vector<Classroom> getClassrooms() const;
 
 };
 

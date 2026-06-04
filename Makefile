@@ -7,6 +7,7 @@ INCLUDE_DIRS = -I./include
 SRC = main.cpp $(wildcard ./utils/*.cpp) $(wildcard ./src/*.cpp) $(wildcard ./src/ui/*.cpp) $(wildcard ./helpers/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 TARGET = program
+-include $(OBJ:.o=.d)
 
 # Rules
 all: $(TARGET)
@@ -15,7 +16,7 @@ $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDE_DIRS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDE_DIRS) -MMD -MP -c $< -o $@
 
 # Header dependencies
 $(OBJ): include/private_school.hpp
@@ -25,4 +26,4 @@ utils/%.o: include/utils/utils.hpp
 helpers/%.o: include/helpers/helpers.hpp
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f $(OBJ) $(OBJ:.o=.d) $(TARGET)

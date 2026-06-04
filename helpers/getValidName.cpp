@@ -7,7 +7,7 @@ string	getValidName(const string &prompt)
 		cout << prompt << endl
 			 << "> ";
 		getline(cin, name);
-		if (isOnlyLetters(name)) {
+		if (!name.empty() && isOnlyLetters(name)) {
 			return (name);
 		} else {
 			cout << "Invalid input. Only letters are allowed.\n";
