@@ -27,3 +27,7 @@ helpers/%.o: include/helpers/helpers.hpp
 
 clean:
 	rm -f $(OBJ) $(OBJ:.o=.d) $(TARGET)
+
+re: clean all
+
+.PHONY: all clean re

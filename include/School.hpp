@@ -1,10 +1,12 @@
 #ifndef SCHOOL_HPP
-#define SCHOOL_HPP
+# define SCHOOL_HPP
 
-#include <string>
-#include <vector>
-#include "Classroom.hpp"
-#include "Student.hpp"
+# include <string>
+# include <vector>
+# include <fstream>
+# include "Classroom.hpp"
+# include "Student.hpp"
+
 
 class School {
     public:

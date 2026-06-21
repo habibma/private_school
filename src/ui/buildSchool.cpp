@@ -1,40 +1,44 @@
 #include "../../include/private_school.hpp"
 #include "../../include/ui/buildSchool.hpp"
 #include "../../include/ui/menu.hpp"
+#include "../../include/SchoolManager.hpp"
 
 // 1- add a classroom to the school
-void addClassroomToSchool(School &school)
+void addClassroomToSchool(School &school, SchoolManager &manager)
 {
     string subject = getValidName("Write the subject of the class: ");
     Classroom classroom(subject);
     school.addClassroom(classroom);
+    manager.save(school);
     std::cout << GREEN << "Classroom added successfully!" << endl
          << RESET;
 }
 
-void addStudentToClassroom(Classroom &classroom)
+void addStudentToClassroom(Classroom &classroom, School &school, SchoolManager &manager)
 {
     string studentName = getValidName("Write the student's name: ");;
     Student student(studentName);
     classroom.addStudent(student);
+    manager.save(school);
     std::cout << GREEN << "Student added successfully!" << endl
          << RESET;
 }
 
-void editClassroom(Classroom &classroom)
+void editClassroom(Classroom &classroom, School &school, SchoolManager &manager)
 {
     string newSubject = getValidName("Write the new subject of the class: ");
     classroom.setSubject(newSubject);
+    manager.save(school);
     std::cout << GREEN << "Classroom updated successfully!" << endl
          << RESET;
 }
 
-void manageClassroom(Classroom &classroom)
+void manageClassroom(Classroom &classroom, School &school, SchoolManager &manager)
 {
     bool shouldExit = false;
     vector<MenuOption> manageMenu = {
-        {"EDIT", "Edit the classroom's information", [&classroom]() { editClassroom(classroom); }},
-        {"ADD STUDENT", "Add a student to the classroom", [&classroom]() { addStudentToClassroom(classroom); }},
+        {"EDIT", "Edit the classroom's information", [&classroom, &school, &manager]() { editClassroom(classroom, school, manager); }},
+        {"ADD STUDENT", "Add a student to the classroom", [&classroom, &school, &manager]() { addStudentToClassroom(classroom, school, manager); }},
         {"BACK", "Go back to the teachers", [&shouldExit]() { shouldExit = true; }}
     };
 
@@ -48,7 +52,7 @@ void manageClassroom(Classroom &classroom)
 
 // To manage classrooms include editing information, adding students and teachers to the classroom,
 // and deleting teachers from the school (CRUD operations)
-void manageClassrooms(School &school)
+void manageClassrooms(School &school, SchoolManager &manager)
 {
     while (true)
     {
@@ -72,17 +76,17 @@ void manageClassrooms(School &school)
         }
         Classroom &classroom = school.getClassrooms()[classroomIndex];
         // manage the selected classroom
-        manageClassroom(classroom);
+        manageClassroom(classroom, school, manager);
     }
 }
 
 // to handle building the school
-void buildSchool(School &school)
+void buildSchool(School &school, SchoolManager &manager)
 {
     bool shouldExit = false;
     vector<MenuOption> buildMenu = {
-        {"ADD CLASSROOM", "Add a classroom to the school", [&school]() { addClassroomToSchool(school); }},
-        {"MANAGE CLASSROOMS", "Manage classrooms", [&school]() { manageClassrooms(school); }},
+        {"ADD CLASSROOM", "Add a classroom to the school", [&school, &manager]() { addClassroomToSchool(school, manager); }},
+        {"MANAGE CLASSROOMS", "Manage classrooms", [&school, &manager]() { manageClassrooms(school, manager); }},
         {"BACK", "Go back to the main menu", [&shouldExit]() { shouldExit = true; }}
     };
 

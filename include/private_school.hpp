@@ -14,12 +14,14 @@
 # include <algorithm>
 # include <vector>
 # include <limits>
+# include <fstream>
 using namespace std;
 
 
 // Function declaration
 bool    isOnlyLetters(const string &s);
 bool    isOnlyDigits(const string &s);
+bool    fileExists(const std::string &filename);
 
 // helper functions
 string	getValidName(const string &prompt);

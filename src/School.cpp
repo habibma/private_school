@@ -2,7 +2,7 @@
 #include "../include/Classroom.hpp"
 
 School::School() = default;
-School::School(const std::string& name) : _name(name) {}
+School::School(const std::string& name) : _name(name), _students(), _classrooms() {}
 School::School(const School& other) = default;
 School& School::operator=(const School& other) = default;
 School::~School() = default;

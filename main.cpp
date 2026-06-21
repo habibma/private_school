@@ -1,8 +1,10 @@
 #include "include/private_school.hpp"
+#include "include/SchoolManager.hpp"
 #include "include/Teacher.hpp"
 #include "include/School.hpp"
 #include "include/ui/buildSchool.hpp"
 #include "include/ui/menu.hpp"
+#include "include/setupWizard.hpp"
 
 void printReport(const School &school)
 {
@@ -34,36 +36,26 @@ void printReport(const School &school)
 
 int main(void)
 {
-	// To start the program:
-	// 1- what is the name the school?
-	// TODO:
-	// 2- the admin should be able to add classrooms to the school
-	// 3- each class should have a subject and a list of students with their scores.
-	// 4- the admin should be able to print a report of each class with the average score of the students.
-	// 5- the admin should be able to print a report of each teacher with the classes they teach and the average score of the students in each class.
-	// 6- the admin should be able to print a report of the school with the teachers and their classes and the average score of the students in each class.
-	// 7- the admin should be able to exit the program.
-	// 8- the program should be able to handle invalid input and display appropriate error messages.
-	// 9- the program should be able to handle memory management and avoid memory leaks.
-	// 10- the program should be able to handle exceptions and display appropriate error messages.
-	// 11- the program should be able to handle edge cases and display appropriate error messages.
+	SchoolManager manager;
 
-	// to catch the school's information
+	// Wlcomme message
 	cout << BOLD << "=== WELCOME TO THE SCHOOL MANAGEMENT SYSTEM ===\n"
 		 << RESET;
 
-	// for the first time the program runs, the school will be empty and the admin will have to add classrooms and students to the school before being able to print any reports. The main menu will have an option to setup the school, which will allow the admin to add classrooms and students to the school. Once the school is set up, the admin can choose to print reports or exit the program.	
-	if (true)
-	{
-		cout << YELLOW << "It looks like this is your first time running the program. Let's set up your school!" << RESET << endl;
-	}
-	string schoolName = getValidName("Write the name of your school: ");
-	School school(schoolName);
+	// for the first time the program runs,
+	// it will run the setup wizard to create a new school,
+	// otherwise, it will load the existing school data from the file
+
+	School mainSchool =
+		manager.schoolExists()
+		? manager.load()
+		: runSetupWizard(manager);
+
 
 	// options for the main menu
 	std::vector<MenuOption> mainMenu = {
-		{"SETUP SCHOOL", "Configure your school", [&school]() mutable { buildSchool(school); }},
-		{"VIEW REPORT", "View the school report", [&school]() { printReport(school); }},
+		{"SETUP SCHOOL", "Configure your school", [mainSchool, &manager]() mutable { buildSchool(mainSchool, manager); }},
+		{"VIEW REPORT", "View the school report", [mainSchool]() { printReport(mainSchool); }},
 		{"EXIT", "Exit", []() { exit(0); }}};
 
 	Menu menu("MAIN MENU", mainMenu);
