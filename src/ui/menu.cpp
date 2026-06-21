@@ -9,13 +9,13 @@ void Menu::display() const
     {
 
         cout << BLUE << "----------------------------------------------\n"
-             << "================= " << title << " ==================\n"
+             << "================= " << BOLD << title << RESET << BLUE <<" ==================\n"
              << "----------------------------------------------\n" << RESET;
 
 
         for (size_t i = 0; i < options.size(); ++i)
         {
-            cout << i + 1 << ". " << setw(15) << left << options[i].label
+            cout << i + 1 << ". " << setw(20) << left << options[i].label
                  << " - " << options[i].description
                  << "\n";
         }

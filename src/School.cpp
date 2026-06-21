@@ -27,6 +27,10 @@ void School::addClassroom(const Classroom& classroom) {
     _classrooms.push_back(classroom);
 }
 
+void School::addStudent(const Student& student) {
+    _students.push_back(student);
+}
+
 
 //other methods
 void School::resetSchool() {

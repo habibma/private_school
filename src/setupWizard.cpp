@@ -8,6 +8,6 @@ School runSetupWizard(SchoolManager& manager)
     string schoolName = getValidName("Write the name of your school: ");
     School school(schoolName);
     manager.save(school);
-    buildSchool(school, manager);
+    //buildSchool(school, manager);
     return school;
 }

@@ -54,8 +54,8 @@ int main(void)
 
 	// options for the main menu
 	std::vector<MenuOption> mainMenu = {
-		{"MANAGE SCHOOL", "Configure your school", [mainSchool, &manager]() mutable { buildSchool(mainSchool, manager); }},
-		{"VIEW REPORT", "View the school report", [mainSchool]() { printReport(mainSchool); }},
+		{"MANAGE SCHOOL", "Configure your school", [&mainSchool, &manager]() { buildSchool(mainSchool, manager); }},
+		{"VIEW REPORT", "View the school report", [&mainSchool]() { printReport(mainSchool); }},
 		{"EXIT", "Exit", []() { exit(0); }}};
 
 	Menu menu("MAIN MENU", mainMenu);
