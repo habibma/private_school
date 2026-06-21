@@ -1,6 +1,6 @@
 #include "../include/setupWizard.hpp"
 #include "../include/ui/buildSchool.hpp"
-#include "../include/Private_school.hpp"
+#include "../include/private_school.hpp"
 
 School runSetupWizard(SchoolManager& manager)
 {

@@ -1,5 +1,5 @@
 #include "../include/SchoolManager.hpp"
-#include "../include/Private_school.hpp"
+#include "../include/private_school.hpp"
 #include "../include/School.hpp"
 
 School SchoolManager::load()
