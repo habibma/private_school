@@ -26,3 +26,11 @@ std::vector<Student> School::getStudents() const {
 void School::addClassroom(const Classroom& classroom) {
     _classrooms.push_back(classroom);
 }
+
+
+//other methods
+void School::resetSchool() {
+    _name.clear();
+    _students.clear();
+    _classrooms.clear();
+}

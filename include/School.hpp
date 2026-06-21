@@ -25,8 +25,11 @@ class School {
 
         //setters
         void    addClassroom(const Classroom& classroom);
-        void    addStudent(const Student& student);
-        void    addStudentToClassroom(const Student& student, const std::string& classroomSubject);
+        //void    addStudent(const Student& student);
+        //void    addStudentToClassroom(const Student& student, const std::string& classroomSubject);
+
+        //other methods
+        void    resetSchool();
 
     private:
         std::string _name;

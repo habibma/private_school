@@ -87,6 +87,7 @@ void buildSchool(School &school, SchoolManager &manager)
     vector<MenuOption> buildMenu = {
         {"ADD CLASSROOM", "Add a classroom to the school", [&school, &manager]() { addClassroomToSchool(school, manager); }},
         {"MANAGE CLASSROOMS", "Manage classrooms", [&school, &manager]() { manageClassrooms(school, manager); }},
+        {"DELETE SCHOOL DATA", "Delete all school data and start over", [&manager, &shouldExit]() { manager.deleteSchoolData(); shouldExit = true; }},
         {"BACK", "Go back to the main menu", [&shouldExit]() { shouldExit = true; }}
     };
 
