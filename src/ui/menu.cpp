@@ -7,11 +7,15 @@ void Menu::display() const
 {
     while (true)
     {
-        cout << "\n=== " << title << " ===\n";
+
+        cout << BLUE << "----------------------------------------------\n"
+             << "================= " << title << " ==================\n"
+             << "----------------------------------------------\n" << RESET;
+
 
         for (size_t i = 0; i < options.size(); ++i)
         {
-            cout << i + 1 << ". " << setw(10) << left << options[i].label
+            cout << i + 1 << ". " << setw(15) << left << options[i].label
                  << " - " << options[i].description
                  << "\n";
         }
