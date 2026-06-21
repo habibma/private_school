@@ -8,6 +8,7 @@
 # define BLUE    "\033[34m"
 # define CYAN    "\033[36m"
 # define BOLD    "\033[1m"
+# define SMALL   "\033[2m"
 
 # include <string>
 # include <iostream>

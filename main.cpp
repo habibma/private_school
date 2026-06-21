@@ -38,7 +38,7 @@ int main(void)
 {
 	SchoolManager manager;
 
-	// Wlcomme message
+	// Welcome message
 	cout << BOLD << "=== WELCOME TO THE SCHOOL MANAGEMENT SYSTEM ===\n"
 		 << RESET;
 

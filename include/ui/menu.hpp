@@ -14,11 +14,15 @@ struct MenuOption {
 class Menu {
     public:
         Menu(const std::string& title, const std::vector<MenuOption>& options);
+        ~Menu();
         void    display() const;
 
     private:
         std::string title;
         std::vector<MenuOption> options;
+        static std::vector<std::string> _breadcrumbs;
+
+        void    printBreadcrumbs() const;
 };
 
 #endif
