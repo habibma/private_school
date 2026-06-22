@@ -23,6 +23,9 @@ class Menu {
         static std::vector<std::string> _breadcrumbs;
 
         void    printBreadcrumbs() const;
+        void    clearScreen() const;
+        void    addbreadcrumbs(const std::string& path);
+        void    removebreadcrumbs();
 };
 
 #endif

@@ -4,21 +4,33 @@ std::vector<std::string> Menu::_breadcrumbs;
 
 Menu::Menu(const std::string &title, const std::vector<MenuOption> &options)
     : title(title), options(options)
-    {
-        _breadcrumbs.push_back(title);
-    }
+{
+   addbreadcrumbs(title);
+}
 
 Menu::~Menu() {
-    _breadcrumbs.pop_back();
+    removebreadcrumbs();
+}
+
+void Menu::clearScreen() const
+{
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+    cout << flush;
 }
 
 void Menu::display() const
 {
     while (true)
     {
-
+        clearScreen();
+        
         cout << BLUE << "----------------------------------------------\n"
-             << "================= " << BOLD << title << RESET << BLUE <<" ==================\n" << RESET;
+             << "================= " << BOLD << title << RESET << BLUE <<" ==================\n"
+             << "----------------------------------------------\n" << RESET;
 
         printBreadcrumbs();
 
@@ -53,17 +65,26 @@ void Menu::display() const
 
 // TODO: to add menu manager that will handle the breadcrumbs and the navigation between menus, and to add a way to go back to the previous menu
 // for now, the breadcrumbs will be handled manually by the caller of the menu, but in the future, it will be handled by the menu manager that will be responsible for navigating between menus and handling the breadcrumbs automatically
+
+void Menu::addbreadcrumbs(const std::string &path)
+{
+    _breadcrumbs.push_back(path);
+}
+
+void Menu::removebreadcrumbs()
+{
+    if (!_breadcrumbs.empty())
+        _breadcrumbs.pop_back();
+}
+
 void Menu::printBreadcrumbs() const
 {
     if (!_breadcrumbs.empty())
     {
-        cout << SMALL << "You are here: " ;
         for (size_t i = 0; i < _breadcrumbs.size(); ++i)
         {
-            cout << _breadcrumbs[i];
-            if (i < _breadcrumbs.size() - 1)
-                cout << " > ";
+            cout << REVERSE << " " << _breadcrumbs[i] << " > " << RESET << " ";
         }
-        cout << "\n" << RESET;
+        cout << "\n";
     }
 }
