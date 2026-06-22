@@ -15,7 +15,7 @@ void addClassroomToSchool(School &school, SchoolManager &manager)
     Classroom classroom(subject);
     school.addClassroom(classroom);
     manager.save(school);
-    MessageManager::success("Classroom added successfully!");
+    MessageManager::success("Classroom '" + subject + "' added successfully!");
 }
 
 void addStudentToClassroom(Classroom &classroom, School &school, SchoolManager &manager)
@@ -29,7 +29,7 @@ void addStudentToClassroom(Classroom &classroom, School &school, SchoolManager &
     classroom.addStudent(student);
     school.addStudent(student);
     manager.save(school);
-    MessageManager::success("Student added successfully!");
+    MessageManager::success("Student '" + studentName + "' added successfully!");
 }
 
 void editClassroom(Classroom &classroom, School &school, SchoolManager &manager)
@@ -37,7 +37,7 @@ void editClassroom(Classroom &classroom, School &school, SchoolManager &manager)
     std::string newSubject = getValidName("Write the new subject of the class: ");
     classroom.setSubject(newSubject);
     manager.save(school);
-    MessageManager::success("Classroom updated successfully!");
+    MessageManager::success("Classroom '" + newSubject + "' updated successfully!");
 }
 
 void manageClassroom(Classroom &classroom, School &school, SchoolManager &manager)
@@ -67,11 +67,12 @@ void manageClassrooms(School &school, SchoolManager &manager)
         MessageManager::info("School " + school.getName() + " has " + std::to_string(school.getClassrooms().size()) + " classroom(s).");
         for (size_t i = 0; i < school.getClassrooms().size(); ++i)
         {
-            MessageManager::info(std::to_string(i + 1) + ". " + school.getClassrooms()[i].getSubject());
+            std::cout << "\n" << std::setw(4) << std::left << (i + 1) << ". " << school.getClassrooms()[i].getSubject() << "\n" << std::endl;
         }
-        int classroomIndex = getValidNumber("Enter the number of the classroom you want to manage (or 0 to go back): ") - 1;
+        int classroomIndex = getValidNumber("Enter the number of the classroom or 0 to cancel: ") - 1;
         if (classroomIndex == -1)
         {
+            MessageManager::warning("Operation cancelled.");
             return;
         }
         if (classroomIndex < 0 || static_cast<size_t>(classroomIndex) >= school.getClassrooms().size())

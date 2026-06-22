@@ -10,7 +10,7 @@ string	getValidName(const string &prompt)
 		if (isOnlyLetters(name)) {
 			return (name);
 		} else {
-			cout << "Invalid input. Only letters are allowed.\n";
+			cout << "Invalid input. Only letters are allowed. Press Enter to continue...\n";
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}

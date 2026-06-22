@@ -1,6 +1,7 @@
 #include "../include/SchoolManager.hpp"
 #include "../include/private_school.hpp"
 #include "../include/School.hpp"
+#include "../include/MessageManager.hpp"
 
 School SchoolManager::load()
 {
@@ -28,11 +29,10 @@ void SchoolManager::save(const School& school)
     {
         file << school.getName() << std::endl;
         file.close();
-        std::cout << GREEN << "School data saved successfully!" << RESET << std::endl;
     }
     else
     {
-        std::cout << RED << "Error: Could not save school data to ./data/school_data.txt" << RESET << std::endl;
+        MessageManager::error("Could not save school data to ./data/school_data.txt");
     }
 }
 
