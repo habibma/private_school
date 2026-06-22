@@ -4,6 +4,6 @@
 #include "School.hpp"
 #include "Reports.hpp"
 
-void reportMenu(const School &school);
+void	showReportMenu(const School &school);
 
 #endif

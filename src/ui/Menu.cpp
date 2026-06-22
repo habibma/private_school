@@ -1,67 +1,60 @@
 #include "../../include/ui/Menu.hpp"
 #include "../../include/MessageManager.hpp"
+#include "../../include/utils/TerminalUtils.hpp"
 
 std::vector<std::string> Menu::_breadcrumbs;
 
 Menu::Menu(const std::string &title, const std::vector<MenuOption> &options)
     : title(title), options(options)
 {
-   addbreadcrumbs(title);
+    addbreadcrumbs(title);
 }
 
-Menu::~Menu() {
+Menu::~Menu()
+{
     removebreadcrumbs();
 }
 
-void Menu::clearScreen() const
-{
-    #ifdef _WIN32
-        system("cls");
-    #else
-        system("clear");
-    #endif
-    cout << flush;
-}
 
 void Menu::display() const
 {
-    while (true)
+
+    utils::clearScreen();
+
+    cout << BLUE << "----------------------------------------------\n"
+         << "================= " << BOLD << title << RESET << BLUE << " ==================\n"
+         << "----------------------------------------------\n"
+         << RESET;
+
+    printBreadcrumbs();
+
+    cout << BLUE << "----------------------------------------------\n"
+         << RESET;
+
+    for (size_t i = 0; i < options.size(); ++i)
     {
-        clearScreen();
-        
-        cout << BLUE << "----------------------------------------------\n"
-             << "================= " << BOLD << title << RESET << BLUE <<" ==================\n"
-             << "----------------------------------------------\n" << RESET;
-
-        printBreadcrumbs();
-
-        cout << BLUE << "----------------------------------------------\n" << RESET;
-
-        for (size_t i = 0; i < options.size(); ++i)
-        {
-            cout << i + 1 << ". " << setw(20) << left << options[i].label
-                 << " - " << options[i].description
-                 << "\n";
-        }
-
-        MessageManager::prompt("Enter your choice: ");
-        cout << "> ";
-
-        int choice;
-        if (cin >> choice)
-        {
-            if (choice >= 1 && choice <= (int)options.size())
-            {
-                cin.ignore(1000, '\n');
-                options[choice - 1].action();
-                return;
-            }
-        }
-
-        MessageManager::error("Invalid choice. Try again. Please use the number corresponding to your choice.");
-        cin.clear();
-        cin.ignore(1000, '\n');
+        cout << i + 1 << ". " << setw(20) << left << options[i].label
+             << " - " << options[i].description
+             << "\n";
     }
+
+    MessageManager::prompt("Enter your choice: ");
+    cout << "> ";
+
+    int choice;
+    if (cin >> choice)
+    {
+        if (choice >= 1 && choice <= (int)options.size())
+        {
+            cin.ignore(1000, '\n');
+            options[choice - 1].action();
+            return;
+        }
+    }
+
+    MessageManager::error("Invalid choice. Try again. Please use the number corresponding to your choice.");
+    cin.clear();
+    cin.ignore(1000, '\n');
 }
 
 // TODO: to add menu manager that will handle the breadcrumbs and the navigation between menus, and to add a way to go back to the previous menu

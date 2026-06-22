@@ -7,7 +7,7 @@ class Student
 {
 	private:
 		std::string _name;
-		double _grade;
+		double		_grade;
 		Student();
 
 	public:

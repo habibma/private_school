@@ -28,7 +28,7 @@ int main(void)
 	// options for the main menu
 	std::vector<MenuOption> mainMenu = {
 		{"MANAGE SCHOOL", "Configure your school", [&mainSchool, &manager]() { buildSchool(mainSchool, manager); }},
-		{"VIEW REPORT", "View the school report", [&mainSchool]() { reportMenu(mainSchool); }},
+		{"VIEW REPORT", "View the school report", [&mainSchool]() { showReportMenu(mainSchool); }},
 		{"EXIT", "Exit", []() { exit(0); }}};
 
 	Menu menu("MAIN MENU", mainMenu);

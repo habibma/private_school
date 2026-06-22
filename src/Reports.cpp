@@ -37,4 +37,3 @@ void Reports::statistics(const School& school)
 	std::cout << "Highest Grade: " << school.getHighestGrade() << std::endl;
 	std::cout << "Lowest Grade: " << school.getLowestGrade() << std::endl;
 }
-
