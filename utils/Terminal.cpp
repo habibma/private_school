@@ -1,4 +1,4 @@
-#include "../include/utils/TerminalUtils.hpp"
+#include "../include/utils/Terminal.hpp"
 
 #include <iostream>
 #include <limits>

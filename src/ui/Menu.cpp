@@ -1,6 +1,6 @@
 #include "../../include/ui/Menu.hpp"
 #include "../../include/MessageManager.hpp"
-#include "../../include/utils/TerminalUtils.hpp"
+#include "../../include/utils/Terminal.hpp"
 
 std::vector<std::string> Menu::_breadcrumbs;
 

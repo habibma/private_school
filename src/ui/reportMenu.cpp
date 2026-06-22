@@ -2,7 +2,7 @@
 #include "../include/MessageManager.hpp"
 #include "../include/Reports.hpp"
 #include "../include/ui/Menu.hpp"
-#include "../include/utils/TerminalUtils.hpp"
+#include "../include/utils/Terminal.hpp"
 
 void showReportMenu(const School &school)
 {
