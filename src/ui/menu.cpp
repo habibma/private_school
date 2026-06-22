@@ -1,4 +1,5 @@
 #include "../../include/ui/menu.hpp"
+#include "../../include/MessageManager.hpp"
 
 std::vector<std::string> Menu::_breadcrumbs;
 
@@ -43,7 +44,7 @@ void Menu::display() const
                  << "\n";
         }
 
-        cout << "\nPlease choose an option:\n";
+        MessageManager::prompt("Enter your choice: ");
         cout << "> ";
 
         int choice;
@@ -57,7 +58,7 @@ void Menu::display() const
             }
         }
 
-        cout << "Invalid choice. Try again. Please use the number corresponding to your choice.\n";
+        MessageManager::error("Invalid choice. Try again. Please use the number corresponding to your choice.");
         cin.clear();
         cin.ignore(1000, '\n');
     }

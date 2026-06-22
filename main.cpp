@@ -5,32 +5,33 @@
 #include "include/ui/buildSchool.hpp"
 #include "include/ui/menu.hpp"
 #include "include/setupWizard.hpp"
+#include "include/MessageManager.hpp"
 
 void printReport(const School &school)
 {
 	if (school.getClassrooms().empty())
 	{
-		cout << YELLOW << "No classrooms in the school yet. Please add classrooms to see the report." << RESET << endl;
+		MessageManager::warning("No classrooms in the school yet. Please add classrooms to see the report.");
 		return;
 	}
 
-	cout << "School Name: " << school.getName() << std::endl;
+	MessageManager::info("School Name: " + school.getName());
 	for (const auto &classroom : school.getClassrooms())
 	{
-		cout << "Classroom Subject: " << classroom.getSubject() << std::endl;
+		MessageManager::info("Classroom Subject: " + classroom.getSubject());
 		if (classroom.getStudents().empty())
 		{
-			cout << YELLOW << "No students in this classroom yet." << RESET << endl;
+			MessageManager::warning("No students in this classroom yet.");
 			continue;
 		}
 		double totalScore = 0;
 		for (const auto &student : classroom.getStudents())
 		{
-			cout << "  Student Name: " << student.getName() << ", Score: " << student.getScore() << std::endl;
+			MessageManager::info("  Student Name: " + student.getName() + ", Score: " + std::to_string(student.getScore()));
 			totalScore += student.getScore();
 		}
 		double averageScore = totalScore / classroom.getStudents().size();
-		cout << "  Average Score: " << averageScore << std::endl;
+		MessageManager::info("  Average Score: " + std::to_string(averageScore));
 	}
 }
 
@@ -39,8 +40,7 @@ int main(void)
 	SchoolManager manager;
 
 	// Welcome message
-	cout << BOLD << "=== WELCOME TO THE SCHOOL MANAGEMENT SYSTEM ===\n"
-		 << RESET;
+	MessageManager::info("=== WELCOME TO THE SCHOOL MANAGEMENT SYSTEM ===");
 
 	// for the first time the program runs,
 	// it will run the setup wizard to create a new school,

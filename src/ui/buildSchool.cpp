@@ -2,35 +2,34 @@
 #include "../../include/ui/buildSchool.hpp"
 #include "../../include/ui/menu.hpp"
 #include "../../include/SchoolManager.hpp"
+#include "../../include/MessageManager.hpp"
 
 // 1- add a classroom to the school
 void addClassroomToSchool(School &school, SchoolManager &manager)
 {
     string subject = getValidName("Write the subject of the class or press Enter to cancel: ");
     if (subject.empty()) {
-        std::cout << RED << "Operation cancelled." << RESET << std::endl;
+        MessageManager::warning("Operation cancelled.");
         return;
     }
     Classroom classroom(subject);
     school.addClassroom(classroom);
     manager.save(school);
-    std::cout << GREEN << "Classroom added successfully!" << endl
-         << RESET;
+    MessageManager::success("Classroom added successfully!");
 }
 
 void addStudentToClassroom(Classroom &classroom, School &school, SchoolManager &manager)
 {
     string studentName = getValidName("Write the student's name or press Enter to cancel: ");
     if (studentName.empty()) {
-        std::cout << RED << "Operation cancelled." << RESET << std::endl;
+        MessageManager::warning("Operation cancelled.");
         return;
     }
     Student student(studentName);
     classroom.addStudent(student);
     school.addStudent(student);
     manager.save(school);
-    std::cout << GREEN << "Student added successfully!" << endl
-         << RESET;
+    MessageManager::success("Student added successfully!");
 }
 
 void editClassroom(Classroom &classroom, School &school, SchoolManager &manager)
@@ -38,8 +37,7 @@ void editClassroom(Classroom &classroom, School &school, SchoolManager &manager)
     string newSubject = getValidName("Write the new subject of the class: ");
     classroom.setSubject(newSubject);
     manager.save(school);
-    std::cout << GREEN << "Classroom updated successfully!" << endl
-         << RESET;
+    MessageManager::success("Classroom updated successfully!");
 }
 
 void manageClassroom(Classroom &classroom, School &school, SchoolManager &manager)
@@ -66,11 +64,10 @@ void manageClassrooms(School &school, SchoolManager &manager)
     while (true)
     {
         // list of classrooms in the school
-        cout << BOLD << "School " << school.getName() << " has " << school.getClassrooms().size() << " classroom(s)." << endl
-             << RESET;
+        MessageManager::info("School " + school.getName() + " has " + std::to_string(school.getClassrooms().size()) + " classroom(s).");
         for (size_t i = 0; i < school.getClassrooms().size(); ++i)
         {
-            cout << i + 1 << ". " << school.getClassrooms()[i].getSubject() << endl;
+            MessageManager::info(std::to_string(i + 1) + ". " + school.getClassrooms()[i].getSubject());
         }
         int classroomIndex = getValidNumber("Enter the number of the classroom you want to manage (or 0 to go back): ") - 1;
         if (classroomIndex == -1)
@@ -79,8 +76,7 @@ void manageClassrooms(School &school, SchoolManager &manager)
         }
         if (classroomIndex < 0 || static_cast<size_t>(classroomIndex) >= school.getClassrooms().size())
         {
-            cout << RED << "Invalid classroom number. Please try again." << endl
-                 << RESET;
+            MessageManager::error("Invalid classroom number. Please try again.");
             continue;
         }
         Classroom &classroom = school.getClassrooms()[classroomIndex];
