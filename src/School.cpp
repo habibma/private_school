@@ -21,6 +21,36 @@ const std::vector<Classroom>& School::getClassrooms() const {
 std::vector<Student> School::getStudents() const {
     return _students;
 }
+double School::getAverageGrade() const {
+    if (_students.empty()) return 0.0;
+    double total = 0.0;
+    for (const auto& student : _students) {
+        total += student.getGrade();
+    }
+    return total / _students.size();
+}
+
+double School::getHighestGrade() const {
+    if (_students.empty()) return 0.0;
+    double highest = _students[0].getGrade();
+    for (const auto& student : _students) {
+        if (student.getGrade() > highest) {
+            highest = student.getGrade();
+        }
+    }
+    return highest;
+}
+
+double School::getLowestGrade() const {
+    if (_students.empty()) return 0.0;
+    double lowest = _students[0].getGrade();
+    for (const auto& student : _students) {
+        if (student.getGrade() < lowest) {
+            lowest = student.getGrade();
+        }
+    }
+    return lowest;
+}
 
 // setters
 void School::addClassroom(const Classroom& classroom) {

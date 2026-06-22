@@ -18,10 +18,13 @@ class School {
         ~School();
 
         //getters
-        std::string getName() const;
-        std::vector<Classroom>& getClassrooms();
-        const std::vector<Classroom>& getClassrooms() const;
-        std::vector<Student> getStudents() const;
+        std::string                     getName() const;
+        std::vector<Classroom>&         getClassrooms();
+        const std::vector<Classroom>&   getClassrooms() const;
+        std::vector<Student>            getStudents() const;
+        double                          getAverageGrade() const;
+        double                          getHighestGrade() const;
+        double                          getLowestGrade() const;
 
         //setters
         void    addClassroom(const Classroom& classroom);

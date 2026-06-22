@@ -1,13 +1,13 @@
 #include "../../include/private_school.hpp"
 #include "../../include/ui/buildSchool.hpp"
-#include "../../include/ui/menu.hpp"
+#include "../../include/ui/Menu.hpp"
 #include "../../include/SchoolManager.hpp"
 #include "../../include/MessageManager.hpp"
 
 // 1- add a classroom to the school
 void addClassroomToSchool(School &school, SchoolManager &manager)
 {
-    string subject = getValidName("Write the subject of the class or press Enter to cancel: ");
+    std::string subject = getValidName("Write the subject of the class or press Enter to cancel: ");
     if (subject.empty()) {
         MessageManager::warning("Operation cancelled.");
         return;
@@ -20,7 +20,7 @@ void addClassroomToSchool(School &school, SchoolManager &manager)
 
 void addStudentToClassroom(Classroom &classroom, School &school, SchoolManager &manager)
 {
-    string studentName = getValidName("Write the student's name or press Enter to cancel: ");
+    std::string studentName = getValidName("Write the student's name or press Enter to cancel: ");
     if (studentName.empty()) {
         MessageManager::warning("Operation cancelled.");
         return;
@@ -34,7 +34,7 @@ void addStudentToClassroom(Classroom &classroom, School &school, SchoolManager &
 
 void editClassroom(Classroom &classroom, School &school, SchoolManager &manager)
 {
-    string newSubject = getValidName("Write the new subject of the class: ");
+    std::string newSubject = getValidName("Write the new subject of the class: ");
     classroom.setSubject(newSubject);
     manager.save(school);
     MessageManager::success("Classroom updated successfully!");
@@ -43,7 +43,7 @@ void editClassroom(Classroom &classroom, School &school, SchoolManager &manager)
 void manageClassroom(Classroom &classroom, School &school, SchoolManager &manager)
 {
     bool shouldExit = false;
-    vector<MenuOption> manageMenu = {
+    std::vector<MenuOption> manageMenu = {
         {"EDIT CLASSROOM", "Edit the classroom's information", [&classroom, &school, &manager]() { editClassroom(classroom, school, manager); }},
         {"ADD STUDENT", "Add a student to the classroom", [&classroom, &school, &manager]() { addStudentToClassroom(classroom, school, manager); }},
         {"BACK", "Go back to the school setup", [&shouldExit]() { shouldExit = true; }}
@@ -89,7 +89,7 @@ void manageClassrooms(School &school, SchoolManager &manager)
 void buildSchool(School &school, SchoolManager &manager)
 {
     bool shouldExit = false;
-    vector<MenuOption> buildMenu = {
+    std::vector<MenuOption> buildMenu = {
         {"ADD CLASSROOM", "Add a classroom to the school", [&school, &manager]() { addClassroomToSchool(school, manager); }},
         {"MANAGE CLASSROOMS", "Manage classrooms", [&school, &manager]() { manageClassrooms(school, manager); }},
         {"DELETE SCHOOL", "Delete all school data and start over", [&manager, &shouldExit]() { manager.deleteSchoolData(); shouldExit = true; }},

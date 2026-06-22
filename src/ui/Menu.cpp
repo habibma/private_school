@@ -1,4 +1,4 @@
-#include "../../include/ui/menu.hpp"
+#include "../../include/ui/Menu.hpp"
 #include "../../include/MessageManager.hpp"
 
 std::vector<std::string> Menu::_breadcrumbs;

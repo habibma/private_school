@@ -6,8 +6,8 @@ Classroom::Classroom() : _subject("") {}
 Classroom::~Classroom() {}
 
 // getters
-string Classroom::getSubject() const { return (_subject); }
-vector<Student> Classroom::getStudents() const { return (students); }
+std::string Classroom::getSubject() const { return (_subject); }
+std::vector<Student> Classroom::getStudents() const { return (students); }
 
 // setters
 void Classroom::setSubject(const string &subject) { _subject = subject; }
@@ -15,13 +15,13 @@ void Classroom::setSubject(const string &subject) { _subject = subject; }
 // other methods
 void Classroom::addStudent(const Student &s) { students.push_back(s); }
 
-double Classroom::getAverageScore() const {
+double Classroom::getAverageGrade() const {
     if (students.empty()) {
         return 0.0; // Avoid division by zero
     }
-    double totalScore = 0.0;
+    double totalGrade = 0.0;
     for (const auto& student : students) {
-        totalScore += student.getScore();
+        totalGrade += student.getGrade();
     }
-    return totalScore / students.size();
+    return totalGrade / students.size();
 }

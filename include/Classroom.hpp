@@ -24,7 +24,7 @@ class Classroom
 		void setSubject(const string &subject);
 
 		void addStudent(const Student &s);
-		double getAverageScore() const;
+		double getAverageGrade() const;
 
 };
 

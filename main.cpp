@@ -3,37 +3,10 @@
 #include "include/Teacher.hpp"
 #include "include/School.hpp"
 #include "include/ui/buildSchool.hpp"
-#include "include/ui/menu.hpp"
+#include "include/ui/Menu.hpp"
+#include "include/ui/reportMenu.hpp"
 #include "include/setupWizard.hpp"
 #include "include/MessageManager.hpp"
-
-void printReport(const School &school)
-{
-	if (school.getClassrooms().empty())
-	{
-		MessageManager::warning("No classrooms in the school yet. Please add classrooms to see the report.");
-		return;
-	}
-
-	MessageManager::info("School Name: " + school.getName());
-	for (const auto &classroom : school.getClassrooms())
-	{
-		MessageManager::info("Classroom Subject: " + classroom.getSubject());
-		if (classroom.getStudents().empty())
-		{
-			MessageManager::warning("No students in this classroom yet.");
-			continue;
-		}
-		double totalScore = 0;
-		for (const auto &student : classroom.getStudents())
-		{
-			MessageManager::info("  Student Name: " + student.getName() + ", Score: " + std::to_string(student.getScore()));
-			totalScore += student.getScore();
-		}
-		double averageScore = totalScore / classroom.getStudents().size();
-		MessageManager::info("  Average Score: " + std::to_string(averageScore));
-	}
-}
 
 int main(void)
 {
@@ -55,7 +28,7 @@ int main(void)
 	// options for the main menu
 	std::vector<MenuOption> mainMenu = {
 		{"MANAGE SCHOOL", "Configure your school", [&mainSchool, &manager]() { buildSchool(mainSchool, manager); }},
-		{"VIEW REPORT", "View the school report", [&mainSchool]() { printReport(mainSchool); }},
+		{"VIEW REPORT", "View the school report", [&mainSchool]() { reportMenu(mainSchool); }},
 		{"EXIT", "Exit", []() { exit(0); }}};
 
 	Menu menu("MAIN MENU", mainMenu);
