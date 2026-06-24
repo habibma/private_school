@@ -13,7 +13,7 @@ int main(void)
 	SchoolManager manager;
 
 	// Welcome message
-	MessageManager::info("=== WELCOME TO THE SCHOOL MANAGEMENT SYSTEM ===");
+	MessageManager::banner("=== WELCOME TO THE SCHOOL MANAGEMENT SYSTEM ===");
 
 	// for the first time the program runs,
 	// it will run the setup wizard to create a new school,

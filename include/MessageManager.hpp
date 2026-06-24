@@ -11,6 +11,7 @@ class	MessageManager
 		static void info(const std::string& message);
 		static void warning(const std::string& message);
 		static void prompt(const std::string& message);
+		static void banner(const std::string& message);
 };
 
 #endif // MESSAGE_MANAGER_HPP

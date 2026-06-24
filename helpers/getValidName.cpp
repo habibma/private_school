@@ -4,13 +4,13 @@ string	getValidName(const string &prompt)
 {
 	string	name;
 	while (true) {
-		cout << prompt << endl
+		cout << "\n" << BLUE << prompt << RESET << endl
 			 << "> ";
 		getline(cin, name);
 		if (isOnlyLetters(name)) {
 			return (name);
 		} else {
-			cout << "Invalid input. Only letters are allowed. Press Enter to continue...\n";
+			cout << RED << "Invalid input. Only letters are allowed. Press Enter to continue..." << RESET << endl;
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}

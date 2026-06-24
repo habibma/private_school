@@ -53,3 +53,16 @@ void MessageManager::prompt(const std::string &message)
 {
 	std::cout << BLUE << message << RESET << std::endl;
 }
+
+void MessageManager::banner(const std::string &message)
+{
+	utils::clearScreen();
+	int msgLength = static_cast<int>(message.length());
+	int borderLength = msgLength + 20; // 10 characters padding on each side
+	std::string border(borderLength, '=');
+	std::cout << MAGENTA << border << "\n" << RESET
+			  << MAGENTA << BOLD << message << RESET << "\n"
+			  << MAGENTA << border << "\n" << RESET;
+
+	utils::pauseForInput();
+}

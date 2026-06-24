@@ -11,6 +11,7 @@
 # define SMALL   "\033[2m"
 # define UNDERLINE "\033[4m"
 # define REVERSE "\033[7m"
+# define MAGENTA "\033[35m"
 
 # include <string>
 # include <iostream>
