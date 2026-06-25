@@ -1,7 +1,7 @@
 #ifndef MESSAGE_MANAGER_HPP
 # define MESSAGE_MANAGER_HPP
 
-#include "private_school.hpp"
+#include <string>
 
 class	MessageManager
 {

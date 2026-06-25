@@ -1,0 +1,4 @@
+Private School is a School Mansgment System that allows you to manage students, teachers, and classes.
+It provides a user-friendly interface to perform various operations such as adding, updating, and deleting
+records. The system also includes features for generating reports and analyzing data related to the
+school management process.

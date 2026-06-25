@@ -7,6 +7,7 @@
 #include "include/ui/reportMenu.hpp"
 #include "include/setupWizard.hpp"
 #include "include/MessageManager.hpp"
+#include "include/ui/Page.hpp"
 
 int main(void)
 {
@@ -25,8 +26,10 @@ int main(void)
 		: runSetupWizard(manager);
 
 
+	Page aboutPage("ABOUT", "This is a school management system that allows you to manage your school data.\nYou can add classrooms, students, and teachers, and view reports.", "about.txt");
 	// options for the main menu
 	std::vector<MenuOption> mainMenu = {
+		{"ABOUT", "About the program", [&aboutPage]() {aboutPage.display();}},
 		{"MANAGE SCHOOL", "Configure your school", [&mainSchool, &manager]() { showSchoolMenu(mainSchool, manager); }},
 		{"VIEW REPORT", "View the school report", [&mainSchool]() { showReportMenu(mainSchool); }},
 		{"EXIT", "Exit", []() { exit(0); }}};
