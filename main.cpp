@@ -2,7 +2,7 @@
 #include "include/SchoolManager.hpp"
 #include "include/Teacher.hpp"
 #include "include/School.hpp"
-#include "include/ui/buildSchool.hpp"
+#include "include/ui/schoolMenu.hpp"
 #include "include/ui/Menu.hpp"
 #include "include/ui/reportMenu.hpp"
 #include "include/setupWizard.hpp"
@@ -27,7 +27,7 @@ int main(void)
 
 	// options for the main menu
 	std::vector<MenuOption> mainMenu = {
-		{"MANAGE SCHOOL", "Configure your school", [&mainSchool, &manager]() { buildSchool(mainSchool, manager); }},
+		{"MANAGE SCHOOL", "Configure your school", [&mainSchool, &manager]() { showSchoolMenu(mainSchool, manager); }},
 		{"VIEW REPORT", "View the school report", [&mainSchool]() { showReportMenu(mainSchool); }},
 		{"EXIT", "Exit", []() { exit(0); }}};
 
