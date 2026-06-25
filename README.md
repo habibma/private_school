@@ -1,17 +1,17 @@
 # Private School 🧑‍🏫
 
 **Private School** is a C++ console program designed to help manage a private school structure.  
-It now supports building a school, adding teachers, managing teacher profiles, creating classrooms, adding students, and printing a school report with class averages.
+It supports setting up a school, adding classrooms, managing classroom students, and browsing a report dashboard with school, classroom, student, and statistics views.
 
 ## ✨ Features
 - Create a school and enter its name
-- Add teachers to the school
-- Manage teachers from an interactive menu
-- Edit teacher names
-- Add classrooms to a teacher profile
+- Open an about page from the main menu
+- Add classrooms to the school
+- Manage classrooms from an interactive menu
+- Edit classroom subjects
 - Add students to a classroom
 - Validate inputs for names and numbers
-- Print a report showing teachers, classrooms, and class averages
+- Open a report menu with school summary, classrooms, students, and statistics
 
 ## 🚀 Getting Started
 
@@ -28,28 +28,38 @@ make
 ```
 
 ### Menu Flow
-1. Start the program and enter the school name.
-2. Use `START` to open the school builder menu.
-3. In the builder menu, use `ADD` to create a teacher.
-4. Use `MANAGE` to edit a teacher, add classrooms, or add students.
-5. Use `REPORT` from the main menu to print the school summary.
+1. Start the program and enter the school name if no saved school exists.
+2. Use `ABOUT` to open the program description page.
+3. Use `MANAGE SCHOOL` to open the school setup menu.
+4. In the school menu, use `ADD CLASSROOM` or `MANAGE CLASSROOMS`.
+5. Use `VIEW REPORT` to open the report dashboard.
 6. Use `EXIT` to close the program.
 
-### Builder Commands
-- `START` - open the school building menu
-- `ADD` - add a new teacher
-- `MANAGE` - select and manage an existing teacher
+### Main Menu
+- `ABOUT` - open the program description page
+- `MANAGE SCHOOL` - open the school setup menu
+- `VIEW REPORT` - open the report dashboard
+- `EXIT` - close the program
+
+### School Menu
+- `ADD CLASSROOM` - add a classroom to the school
+- `MANAGE CLASSROOMS` - select and manage an existing classroom
+- `DELETE SCHOOL` - remove the saved school data and start over
 - `BACK` - return to the main menu
-- `EDIT` - update a teacher's first and last name
-- `ADD_CLASS` - add a classroom to a teacher
-- `ADD_STUDENT` - add a student to one of the teacher's classrooms
-- `DELETE` - remove a teacher from the school
+
+### Classroom Menu
+- `EDIT CLASSROOM` - update the classroom subject
+- `ADD STUDENT` - add a student to the selected classroom
+- `BACK` - return to the school menu
 
 ## 🛠️ Future Roadmap
-- Save/load data from files
-- Support persistence for schools, teachers, classrooms, and students
+- Persist classrooms, students, and report data to disk
 - Improve delete/update flows with safer record handling
-- Add richer reporting for teachers and classrooms
+- Add richer reporting and filtering for classroom statistics
+
+## 📝 Current Persistence
+- The current save/load flow restores the school name from `data/school_data.txt`.
+- Classrooms and students are managed in memory during the session and are not yet persisted.
 
 ## 🤝 Contributing
 Contributions are welcome!
