@@ -12,6 +12,7 @@ class Classroom
 	private:
 		string _subject;
 		vector<Student> students;
+		string _material; // Assuming you want to store a single material for simplicity. TODO: change this to a Material class.
 
 	public:
 		Classroom();
@@ -25,6 +26,10 @@ class Classroom
 
 		void addStudent(const Student &s);
 		double getAverageGrade() const;
+
+		void addMaterial(const string &material);
+
+		void removeClassroomFromSchool(vector<Classroom> &classrooms);
 
 };
 

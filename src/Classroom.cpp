@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "../include/Classroom.hpp"
 
 // constructors and destructor
@@ -24,4 +25,14 @@ double Classroom::getAverageGrade() const {
         totalGrade += student.getGrade();
     }
     return totalGrade / students.size();
+}
+
+void Classroom::addMaterial(const string &material) {
+    _material = material;
+}
+
+void Classroom::removeClassroomFromSchool(vector<Classroom> &classrooms) {
+    classrooms.erase(std::remove_if(classrooms.begin(), classrooms.end(),
+                                    [this](const Classroom &c) { return c.getSubject() == this->_subject; }),
+                     classrooms.end());
 }

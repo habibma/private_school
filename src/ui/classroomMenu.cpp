@@ -3,6 +3,9 @@
 #include "MessageManager.hpp"
 #include "../include/ui/Menu.hpp"
 #include "SchoolManager.hpp"
+#include "Classroom.hpp"
+#include "Student.hpp"
+#include "utils/Terminal.hpp"
 
 
 void addStudentToClassroom(Classroom &classroom, School &school, SchoolManager &manager)
@@ -36,10 +39,35 @@ void showClassroomMenu(Classroom &classroom, School &school, SchoolManager &mana
     std::vector<MenuOption> manageMenu = {
         {"EDIT CLASSROOM", "Edit the classroom's information", [&classroom, &school, &manager]() { editClassroom(classroom, school, manager); }},
         {"ADD STUDENT", "Add a student to the classroom", [&classroom, &school, &manager]() { addStudentToClassroom(classroom, school, manager); }},
+        {"VIEW STUDENTS", "View the list of students in the classroom", [&classroom]() {
+            std::cout << "Students in " << classroom.getSubject() << ":\n";
+            for (const auto &student : classroom.getStudents())
+            {
+                std::cout << "- " << student.getName() << " (Grade: " << student.getGrade() << ")\n";
+            }
+            utils::pauseForInput();
+        }},
+        {"ADD MATERIAL", "Add a material to the classroom", [&classroom, &school, &manager]() {
+            std::string materialName = getValidName("Write the name of the material or press Enter to cancel: ");
+            if (materialName.empty()) {
+                MessageManager::warning("Operation cancelled.");
+                return;
+            }
+            // Assuming Classroom has a method to add materials
+            classroom.addMaterial(materialName);
+            manager.save(school);
+            MessageManager::success("Material '" + materialName + "' added successfully!");
+        }},
+        {"DELETE CLASSROOM", "Delete the classroom from the school", [&classroom, &school, &manager, &shouldExit]() {
+            classroom.removeClassroomFromSchool(school.getClassrooms());
+            manager.save(school);
+            MessageManager::success("Classroom '" + classroom.getSubject() + "' deleted successfully!");
+            shouldExit = true; // Exit after deletion
+        }},
         {"BACK", "Go back to the school setup", [&shouldExit]() { shouldExit = true; }}
     };
 
-    Menu menu("CLASSROOM MANAGEMENT", manageMenu);
+    Menu menu("CLASSROOM MANAGEMENT: " + classroom.getSubject(), manageMenu);
 
     while (!shouldExit)
     {
@@ -50,27 +78,28 @@ void showClassroomMenu(Classroom &classroom, School &school, SchoolManager &mana
 
 void manageClassrooms(School &school, SchoolManager &manager)
 {
-    while (true)
+    bool shouldExit = false;
+    std::vector<MenuOption> listOfClassrooms;
+
+    if (school.getClassrooms().empty())
     {
-        // list of classrooms in the school
-        MessageManager::info("School " + school.getName() + " has " + std::to_string(school.getClassrooms().size()) + " classroom(s).");
-        for (size_t i = 0; i < school.getClassrooms().size(); ++i)
-        {
-            std::cout << "\n" << std::setw(4) << std::left << (i + 1) << ". " << school.getClassrooms()[i].getSubject() << "\n" << std::endl;
-        }
-        int classroomIndex = getValidNumber("Enter the number of the classroom or 0 to cancel: ") - 1;
-        if (classroomIndex == -1)
-        {
-            MessageManager::warning("Operation cancelled.");
-            return;
-        }
-        if (classroomIndex < 0 || static_cast<size_t>(classroomIndex) >= school.getClassrooms().size())
-        {
-            MessageManager::error("Invalid classroom number. Please try again.");
-            continue;
-        }
-        Classroom &classroom = school.getClassrooms()[classroomIndex];
-        // manage the selected classroom
-        showClassroomMenu(classroom, school, manager);
+        MessageManager::info("No classrooms available. Please add a classroom first.");
+        return;
+    }
+
+    for (size_t i = 0; i < school.getClassrooms().size(); ++i)
+    {
+        listOfClassrooms.push_back({school.getClassrooms()[i].getSubject(), "Manage the classroom", [&school, &manager, i, &shouldExit]() {
+                                  Classroom &classroom = school.getClassrooms()[i];
+                                  showClassroomMenu(classroom, school, manager);
+                              }});
+    }
+
+    listOfClassrooms.push_back({"BACK", "Go back to the school setup", [&shouldExit]() { shouldExit = true; }});
+
+    Menu menu("MANAGE CLASSROOMS", listOfClassrooms);
+    while (!shouldExit)
+    {
+        menu.display();
     }
 }
