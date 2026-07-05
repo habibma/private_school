@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "../include/School.hpp"
 #include "../include/Classroom.hpp"
 
@@ -67,4 +68,11 @@ void School::resetSchool() {
     _name.clear();
     _students.clear();
     _classrooms.clear();
+}
+
+// removers
+void School::removeClassroom(const std::string& subject) {
+    _classrooms.erase(std::remove_if(_classrooms.begin(), _classrooms.end(),
+                                      [&subject](const Classroom& c) { return c.getSubject() == subject; }),
+                      _classrooms.end());
 }

@@ -40,11 +40,7 @@ void showClassroomMenu(Classroom &classroom, School &school, SchoolManager &mana
         {"EDIT CLASSROOM", "Edit the classroom's information", [&classroom, &school, &manager]() { editClassroom(classroom, school, manager); }},
         {"ADD STUDENT", "Add a student to the classroom", [&classroom, &school, &manager]() { addStudentToClassroom(classroom, school, manager); }},
         {"VIEW STUDENTS", "View the list of students in the classroom", [&classroom]() {
-            std::cout << "Students in " << classroom.getSubject() << ":\n";
-            for (const auto &student : classroom.getStudents())
-            {
-                std::cout << "- " << student.getName() << " (Grade: " << student.getGrade() << ")\n";
-            }
+            classroom.getStudentList();
             utils::pauseForInput();
         }},
         {"ADD MATERIAL", "Add a material to the classroom", [&classroom, &school, &manager]() {
@@ -59,7 +55,7 @@ void showClassroomMenu(Classroom &classroom, School &school, SchoolManager &mana
             MessageManager::success("Material '" + materialName + "' added successfully!");
         }},
         {"DELETE CLASSROOM", "Delete the classroom from the school", [&classroom, &school, &manager, &shouldExit]() {
-            classroom.removeClassroomFromSchool(school.getClassrooms());
+            school.removeClassroom(classroom.getSubject());
             manager.save(school);
             MessageManager::success("Classroom '" + classroom.getSubject() + "' deleted successfully!");
             shouldExit = true; // Exit after deletion

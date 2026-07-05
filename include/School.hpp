@@ -30,6 +30,7 @@ class School {
         void    addClassroom(const Classroom& classroom);
         void    addStudent(const Student& student);
         //void    addStudentToClassroom(const Student& student, const std::string& classroomSubject);
+        void    removeClassroom(const std::string& subject);
 
         //other methods
         void    resetSchool();

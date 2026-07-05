@@ -1,4 +1,4 @@
-#include <algorithm>
+#include <iostream>
 #include "../include/Classroom.hpp"
 
 // constructors and destructor
@@ -12,6 +12,19 @@ std::vector<Student> Classroom::getStudents() const { return (students); }
 
 // setters
 void Classroom::setSubject(const string &subject) { _subject = subject; }
+
+
+// getters
+void Classroom::getStudentList() const {
+    if (students.empty()) {
+        std::cout << "No students in this classroom." << std::endl;
+        return;
+    }
+    std::cout << "Students in " << _subject << ":\n";
+    for (const auto &student : students) {
+        std::cout << "- " << student.getName() << " (Grade: " << student.getGrade() << ")\n";
+    }
+}
 
 // other methods
 void Classroom::addStudent(const Student &s) { students.push_back(s); }
@@ -29,10 +42,4 @@ double Classroom::getAverageGrade() const {
 
 void Classroom::addMaterial(const string &material) {
     _material = material;
-}
-
-void Classroom::removeClassroomFromSchool(vector<Classroom> &classrooms) {
-    classrooms.erase(std::remove_if(classrooms.begin(), classrooms.end(),
-                                    [this](const Classroom &c) { return c.getSubject() == this->_subject; }),
-                     classrooms.end());
 }

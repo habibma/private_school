@@ -24,12 +24,11 @@ class Classroom
 
 		void setSubject(const string &subject);
 
+		void getStudentList() const;
 		void addStudent(const Student &s);
 		double getAverageGrade() const;
 
 		void addMaterial(const string &material);
-
-		void removeClassroomFromSchool(vector<Classroom> &classrooms);
 
 };
 
