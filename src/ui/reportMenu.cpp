@@ -12,6 +12,8 @@ void showReportMenu(const School &school)
 		return;
 	}
 
+	bool shouldExit = false;
+
 	Menu reportMenu("SCHOOL REPORT", {{"SCHOOL SUMMARY", "View a summary of the school", [&school]()
 									   { Reports::schoolSummary(school); utils::pauseForInput(); }},
 									  {"CLASSROOMS", "View a list of classrooms in the school", [&school]()
@@ -20,7 +22,11 @@ void showReportMenu(const School &school)
 									   { Reports::students(school); utils::pauseForInput(); }},
 									  {"STATISTICS", "View various statistics about the school", [&school]()
 									   { Reports::statistics(school); utils::pauseForInput(); }},
-									  {"BACK TO MAIN MENU", "Return to the main menu", []() {}}});
+									  {"BACK TO MAIN MENU", "Return to the main menu", [&shouldExit]()
+									   { shouldExit = true; }}});
 
-	reportMenu.display();
+	while (!shouldExit)
+	{
+		reportMenu.display();
+	}
 }
