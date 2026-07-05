@@ -19,7 +19,7 @@ class	Page
 	private:
 		std::string _title;
 		std::string _description;
-		std::string _body;
+		std::string _filename;
 };
 
 #endif

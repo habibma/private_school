@@ -7,7 +7,7 @@
 #include "include/ui/reportMenu.hpp"
 #include "include/setupWizard.hpp"
 #include "include/MessageManager.hpp"
-#include "include/ui/Page.hpp"
+#include "include/Page.hpp"
 
 int main(void)
 {

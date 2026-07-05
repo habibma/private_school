@@ -10,6 +10,8 @@ class TextManager
 		static void	heading2(const std::string &text);
 		static void	description(const std::string &text);
 		static void	text(const std::string &text);
+		static void	blankLine();
+		static void bulletPoint(const std::string &text);
 
 		static void	error(const std::string &message);
 		static void	success(const std::string &message);

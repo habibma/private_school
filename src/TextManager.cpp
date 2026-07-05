@@ -15,6 +15,16 @@ void TextManager::heading2(const std::string &text)
 	std::cout << UNDERLINE << text << RESET << std::endl;
 }
 
+void TextManager::blankLine()
+{
+	std::cout << std::endl;
+}
+
+void TextManager::bulletPoint(const std::string &text)
+{
+	std::cout << "	" << "- " << text << std::endl;
+}
+
 void TextManager::description(const std::string &text)
 {
 	//description in a box with a border amd tp and bottom margin of 1 line

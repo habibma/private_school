@@ -1,4 +1,20 @@
-Private School is a School Managment System that allows you to manage students, teachers, and classes.
-It provides a user-friendly interface to perform various operations such as adding, updating, and deleting
-records. The system also includes features for generating reports and analyzing data related to the
-school management process.
+# About
+> Private School is a C++ console application for managing a private school.
+
+## What you can do
+- Create or load a school
+- Edit the school name
+- Add classrooms to the school
+- Manage classrooms and add students
+- View school summaries, classroom lists, student lists, and statistics
+- Delete the saved school data and start over
+
+## How it works
+> The current persistence layer saves the school name to `data/school_data.txt`.
+> Classrooms and students are managed in memory during the session.
+
+## Navigation
+- Use `ABOUT` to open this page
+- Use `MANAGE SCHOOL` to configure the school
+- Use `VIEW REPORT` to browse reports
+- Use `EXIT` to close the program
