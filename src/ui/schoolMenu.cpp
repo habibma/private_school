@@ -19,12 +19,25 @@ void addClassroomToSchool(School &school, SchoolManager &manager)
     MessageManager::success("Classroom '" + subject + "' added successfully!");
 }
 
+void editSchoolName(School &school, SchoolManager &manager)
+{
+    std::string newName = getValidName("Write the new name of the school: ");
+    if (newName.empty()) {
+        MessageManager::warning("Operation cancelled.");
+        return;
+    }
+    school = School(newName); // Recreate the school with the new name
+    manager.save(school);
+    MessageManager::success("School name updated to '" + newName + "' successfully!");
+}
+
 void showSchoolMenu(School &school, SchoolManager &manager)
 {
     bool shouldExit = false;
     std::vector<MenuOption> schoolMenu = {
         {"ADD CLASSROOM", "Add a classroom to the school", [&school, &manager]() { addClassroomToSchool(school, manager); }},
         {"MANAGE CLASSROOMS", "Manage classrooms", [&school, &manager]() { manageClassrooms(school, manager); }},
+        {"EDIT SCHOOL NAME", "Edit the name of the school", [&school, &manager]() { editSchoolName(school, manager); }},
         {"DELETE SCHOOL", "Delete all school data and start over", [&manager, &shouldExit]() { manager.deleteSchoolData(); shouldExit = true; }},
         {"BACK", "Go back to the main menu", [&shouldExit]() { shouldExit = true; }}
     };
