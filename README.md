@@ -19,21 +19,14 @@ It supports setting up a school, adding classrooms, managing classroom students,
 - A C++ compiler (e.g., `g++`, `clang++`)
 - Git (to clone the repo)
 
-make
-
-### Build
-```bash
-git clone https://github.com/habibma/private_teacher.git private_teacher
-cd private_teacher
-```
-
 ### Dependencies
-This project uses the [nlohmann/json](https://github.com/nlohmann/json) library.
+This project uses the [nlohmann/json](https://github.com/nlohmann/json) library, which is vendored under `external/json/`.
 
 ### Compile and Run
 
-``` bash
-git clone https://github.com/nlohmann/json.git external/json
+```bash
+git clone <repository-url> Privat_School
+cd Privat_School
 make
 ./program
 ```
@@ -64,13 +57,14 @@ make
 - `BACK` - return to the school menu
 
 ## 🛠️ Future Roadmap
-- Persist classrooms, students, and report data to disk
 - Improve delete/update flows with safer record handling
 - Add richer reporting and filtering for classroom statistics
 
 ## 📝 Current Persistence
-- The current save/load flow restores the school name from `data/school_data.txt`.
-- Classrooms and students are managed in memory during the session and are not yet persisted.
+- The current save/load flow uses `data/school_data.json`.
+- School data is loaded automatically on startup when the file exists.
+- School name, classrooms, and classroom students are saved back to the same JSON file.
+- Deleting school data removes `data/school_data.json` and clears the in-memory school state.
 
 ## 🤝 Contributing
 Contributions are welcome!
