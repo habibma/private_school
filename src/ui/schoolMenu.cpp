@@ -15,7 +15,8 @@ void addClassroomToSchool(School &school, SchoolManager &manager)
     }
     Classroom classroom(subject);
     school.addClassroom(classroom);
-    manager.save(school);
+    manager.setPrimarySchool(school);
+    manager.save();
     MessageManager::success("Classroom '" + subject + "' added successfully!");
 }
 
@@ -26,8 +27,9 @@ void editSchoolName(School &school, SchoolManager &manager)
         MessageManager::warning("Operation cancelled.");
         return;
     }
-    school = School(newName); // Recreate the school with the new name
-    manager.save(school);
+    school.setName(newName);
+    manager.setPrimarySchool(school);
+    manager.save();
     MessageManager::success("School name updated to '" + newName + "' successfully!");
 }
 

@@ -9,3 +9,8 @@
 *.dSYM/
 build/
 program
+
+# External dependencies
+external/
+
+.vscode/

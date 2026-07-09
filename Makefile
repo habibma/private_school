@@ -1,7 +1,7 @@
 # Compiler and flags
 
 CXX = g++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++11
+CXXFLAGS = -Wall -Wextra -Werror -std=c++11 
 
 # Colors
 
@@ -12,8 +12,8 @@ RESET = \033[0m
 
 # Files
 
-INCLUDE_DIRS = -I./include
-SRC = main.cpp $(wildcard ./utils/*.cpp) $(wildcard ./src/*.cpp) $(wildcard ./src/ui/*.cpp) $(wildcard ./helpers/*.cpp)
+INCLUDE_DIRS = -I./include -I./external/json/single_include
+SRC = main.cpp $(wildcard ./utils/*.cpp) $(wildcard ./src/*.cpp) $(wildcard ./src/ui/*.cpp) $(wildcard ./helpers/*.cpp) $(wildcard ./src/database/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 TARGET = program
 

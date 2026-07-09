@@ -19,10 +19,21 @@ It supports setting up a school, adding classrooms, managing classroom students,
 - A C++ compiler (e.g., `g++`, `clang++`)
 - Git (to clone the repo)
 
-### Build and Run
+make
+
+### Build
 ```bash
-git clone https://github.com/habibma/private_teacher.git
+git clone https://github.com/habibma/private_teacher.git private_teacher
 cd private_teacher
+```
+
+### Dependencies
+This project uses the [nlohmann/json](https://github.com/nlohmann/json) library.
+
+### Compile and Run
+
+``` bash
+git clone https://github.com/nlohmann/json.git external/json
 make
 ./program
 ```

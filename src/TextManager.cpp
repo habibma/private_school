@@ -12,7 +12,7 @@ void TextManager::heading1(const std::string &text)
 
 void TextManager::heading2(const std::string &text)
 {
-	std::cout << UNDERLINE << text << RESET << std::endl;
+	std::cout << BOLD << UNDERLINE << text << RESET << std::endl;
 }
 
 void TextManager::blankLine()
@@ -31,9 +31,9 @@ void TextManager::description(const std::string &text)
 	int msgLength = static_cast<int>(text.length());
 	int borderLength = msgLength + 4; // 2 characters padding on each side
 	std::string border(borderLength, '-');
-	std::cout << "\n" << border << "\n"
+	std::cout << border << "\n"
 			  << "| " << text << " |\n"
-			  << border << "\n" << std::endl;
+			  << border << std::endl;
 }
 
 void TextManager::text(const std::string &text)

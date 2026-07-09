@@ -25,6 +25,7 @@ class School {
         double                          getAverageGrade() const;
         double                          getHighestGrade() const;
         double                          getLowestGrade() const;
+        void                            setName(const std::string& name);
 
         //setters
         void    addClassroom(const Classroom& classroom);
@@ -40,5 +41,7 @@ class School {
         std::vector<Student> _students;
         std::vector<Classroom> _classrooms;
 };
+
+std::ostream& operator<<(std::ostream& os, const School& school);
 
 #endif

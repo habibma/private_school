@@ -1,0 +1,24 @@
+{
+    "schools": [
+        {
+            "classrooms": [
+                {
+                    "students": [
+                        {
+                            "grade": 0.0,
+                            "name": "Simona"
+                        }
+                    ],
+                    "subject": "Math"
+                }
+            ],
+            "name": "MY NEW SCHOOL",
+            "students": [
+                {
+                    "grade": 0.0,
+                    "name": "Simona"
+                }
+            ]
+        }
+    ]
+}

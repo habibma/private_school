@@ -18,7 +18,8 @@ void addStudentToClassroom(Classroom &classroom, School &school, SchoolManager &
     Student student(studentName);
     classroom.addStudent(student);
     school.addStudent(student);
-    manager.save(school);
+    manager.setPrimarySchool(school);
+    manager.save();
     MessageManager::success("Student '" + studentName + "' added successfully!");
 }
 
@@ -26,7 +27,8 @@ void editClassroom(Classroom &classroom, School &school, SchoolManager &manager)
 {
     std::string newSubject = getValidName("Write the new subject of the class: ");
     classroom.setSubject(newSubject);
-    manager.save(school);
+    manager.setPrimarySchool(school);
+    manager.save();
     MessageManager::success("Classroom '" + newSubject + "' updated successfully!");
 }
 
@@ -51,12 +53,12 @@ void showClassroomMenu(Classroom &classroom, School &school, SchoolManager &mana
             }
             // Assuming Classroom has a method to add materials
             classroom.addMaterial(materialName);
-            manager.save(school);
             MessageManager::success("Material '" + materialName + "' added successfully!");
         }},
         {"DELETE CLASSROOM", "Delete the classroom from the school", [&classroom, &school, &manager, &shouldExit]() {
             school.removeClassroom(classroom.getSubject());
-            manager.save(school);
+            manager.setPrimarySchool(school);
+            manager.save();
             MessageManager::success("Classroom '" + classroom.getSubject() + "' deleted successfully!");
             shouldExit = true; // Exit after deletion
         }},

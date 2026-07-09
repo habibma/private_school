@@ -9,7 +9,7 @@ School runSetupWizard(SchoolManager& manager)
     MessageManager::banner("=== SET UP YOUR SCHOOL ===");
     string schoolName = getValidName("Write the name of your school: ");
     School school(schoolName);
-    manager.save(school);
-    //buildSchool(school, manager);
+    manager.setPrimarySchool(school);
+    manager.save();
     return school;
 }

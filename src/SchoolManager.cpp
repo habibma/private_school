@@ -1,43 +1,54 @@
 #include "../include/SchoolManager.hpp"
 #include "../include/private_school.hpp"
-#include "../include/School.hpp"
+#include "School.hpp"
 #include "../include/MessageManager.hpp"
+#include "database/JsonDatabase.hpp"
 
 School SchoolManager::load()
 {
-    // check if the file "school_data" exists, if it does, load the data from it and return the school object, if it doesn't, return an empty school object
-    if (fileExists("./data/school_data.txt"))
+    _schools.clear();
+    JsonDatabase jsonDb("./data/school_data.json");
+    if (!jsonDb.load(*this))
     {
-        std::ifstream file("./data/school_data.txt");
-        if (file.is_open())
-        {
-            std::string name;
-            std::getline(file, name);
-            School school(name);
-            file.close();
-            return school;
-        }
+        MessageManager::error("Could not load school data from ./data/school_data.json");
     }
-    return School();
+    if (_schools.empty())
+        return School();
+    return _schools[0];
 }
 
-void SchoolManager::save(const School& school)
+void SchoolManager::save()
 {
-    // save the data of the school in the file "school_data"
-    std::ofstream file("./data/school_data.txt");
-    if (file.is_open())
+    JsonDatabase jsonDb("./data/school_data.json");
+    if (!jsonDb.save(*this))
     {
-        file << school.getName() << std::endl;
-        file.close();
-    }
-    else
-    {
-        MessageManager::error("Could not save school data to ./data/school_data.txt");
+        MessageManager::error("Could not save school data to ./data/school_data.json");
     }
 }
 
 bool SchoolManager::schoolExists()
 {
     // check if the file "school_data" exists, if it does, return true, if it doesn't, return false
-    return fileExists("./data/school_data.txt");
+    return fileExists("./data/school_data.json");
+}
+
+void SchoolManager::setPrimarySchool(const School& school)
+{
+    if (_schools.empty())
+        _schools.push_back(school);
+    else
+        _schools[0] = school;
+}
+
+
+// getters
+const std::vector<School>& SchoolManager::getSchools() const
+{
+    return _schools;
+}
+
+// setters
+void SchoolManager::addSchool(const School& school)
+{
+    _schools.push_back(school);
 }

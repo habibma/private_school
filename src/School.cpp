@@ -53,6 +53,10 @@ double School::getLowestGrade() const {
     return lowest;
 }
 
+void School::setName(const std::string& name) {
+    _name = name;
+}
+
 // setters
 void School::addClassroom(const Classroom& classroom) {
     _classrooms.push_back(classroom);
@@ -75,4 +79,28 @@ void School::removeClassroom(const std::string& subject) {
     _classrooms.erase(std::remove_if(_classrooms.begin(), _classrooms.end(),
                                       [&subject](const Classroom& c) { return c.getSubject() == subject; }),
                       _classrooms.end());
+}
+
+// Overloaded operator for outputting School information
+std::ostream& operator<<(std::ostream& os, const School& school)
+{
+    os << "School Name: " << school.getName() << "\n";
+    os << "Number of Classrooms: " << school.getClassrooms().size() << "\n";
+    os << "Classrooms: ";
+    for (const auto& classroom : school.getClassrooms()) {
+        os << classroom.getSubject() << " ";
+        for (const auto& student : classroom.getStudents()) {
+            os << student.getName() << " (Grade: " << student.getGrade() << ") ";
+        }
+    }
+    os << "\n";
+    os << "Number of Students: " << school.getStudents().size() << "\n";
+    os << "Students: ";
+    for (const auto& student : school.getStudents()) {
+        os << student.getName() << " (Grade: " << student.getGrade() << ") ";
+    }
+    os << "Average Grade: " << school.getAverageGrade() << "\n";
+    os << "Highest Grade: " << school.getHighestGrade() << "\n";
+    os << "Lowest Grade: " << school.getLowestGrade() << "\n";
+    return os;
 }
