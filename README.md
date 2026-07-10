@@ -10,6 +10,7 @@ It supports setting up a school, adding classrooms, managing classroom students,
 - Manage classrooms from an interactive menu
 - Edit classroom subjects
 - Add students to a classroom
+- Add materials to a classroom
 - Validate inputs for names and numbers
 - Open a report menu with school summary, classrooms, students, and statistics
 

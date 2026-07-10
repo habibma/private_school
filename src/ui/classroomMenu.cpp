@@ -7,20 +7,29 @@
 #include "Student.hpp"
 #include "utils/Terminal.hpp"
 
+Student promptStudent()
+{
+    std::string studentFirstname = getValidName("First name: ");
+    std::string studentLastname = getValidName("Last name: ");
+    std::string studentName = studentFirstname + " " + studentLastname;
+    if (studentName.empty()) {
+        MessageManager::warning("Operation cancelled.");
+        return Student(""); // Return an empty student to indicate cancellation
+    }
+    return Student(studentName);
+}
 
 void addStudentToClassroom(Classroom &classroom, School &school, SchoolManager &manager)
 {
-    std::string studentName = getValidName("Write the student's name or press Enter to cancel: ");
-    if (studentName.empty()) {
-        MessageManager::warning("Operation cancelled.");
+    Student student = promptStudent();
+    if (student.getName().empty()) {
         return;
     }
-    Student student(studentName);
     classroom.addStudent(student);
     school.addStudent(student);
     manager.setPrimarySchool(school);
     manager.save();
-    MessageManager::success("Student '" + studentName + "' added successfully!");
+    MessageManager::success("Student '" + student.getName() + "' added successfully!");
 }
 
 void editClassroom(Classroom &classroom, School &school, SchoolManager &manager)

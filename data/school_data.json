@@ -7,6 +7,10 @@
                         {
                             "grade": 0.0,
                             "name": "Simona"
+                        },
+                        {
+                            "grade": 0.0,
+                            "name": "Habib Mote"
                         }
                     ],
                     "subject": "Math"
@@ -20,6 +24,10 @@
                 {
                     "grade": 0.0,
                     "name": "Simona"
+                },
+                {
+                    "grade": 0.0,
+                    "name": "Habib Mote"
                 }
             ]
         }
