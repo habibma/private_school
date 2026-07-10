@@ -32,8 +32,27 @@ void editClassroom(Classroom &classroom, School &school, SchoolManager &manager)
     MessageManager::success("Classroom '" + newSubject + "' updated successfully!");
 }
 
-// To manage classrooms include editing information, adding students and teachers to the classroom,
-// and deleting teachers from the school (CRUD operations)
+
+void deleteClassroom(Classroom &classroom, School &school, SchoolManager &manager)
+{
+    school.removeClassroom(classroom.getSubject());
+    manager.setPrimarySchool(school);
+    manager.save();
+    MessageManager::success("Classroom '" + classroom.getSubject() + "' deleted successfully!");
+}
+
+void addMaterialToClassroom(Classroom &classroom, School &school, SchoolManager &manager)
+{
+    std::string materialName = getValidName("Write the name of the material or press Enter to cancel: ");
+    if (materialName.empty()) {
+        MessageManager::warning("Operation cancelled.");
+        return;
+    }
+    classroom.addMaterial(materialName);
+    manager.setPrimarySchool(school);
+    manager.save();
+    MessageManager::success("Material '" + materialName + "' added successfully!");
+}
 
 void showClassroomMenu(Classroom &classroom, School &school, SchoolManager &manager)
 {
@@ -45,21 +64,9 @@ void showClassroomMenu(Classroom &classroom, School &school, SchoolManager &mana
             classroom.getStudentList();
             utils::pauseForInput();
         }},
-        {"ADD MATERIAL", "Add a material to the classroom", [&classroom, &school, &manager]() {
-            std::string materialName = getValidName("Write the name of the material or press Enter to cancel: ");
-            if (materialName.empty()) {
-                MessageManager::warning("Operation cancelled.");
-                return;
-            }
-            // Assuming Classroom has a method to add materials
-            classroom.addMaterial(materialName);
-            MessageManager::success("Material '" + materialName + "' added successfully!");
-        }},
+        {"ADD MATERIAL", "Add a material to the classroom", [&classroom, &school, &manager]() {addMaterialToClassroom(classroom, school, manager);}},
         {"DELETE CLASSROOM", "Delete the classroom from the school", [&classroom, &school, &manager, &shouldExit]() {
-            school.removeClassroom(classroom.getSubject());
-            manager.setPrimarySchool(school);
-            manager.save();
-            MessageManager::success("Classroom '" + classroom.getSubject() + "' deleted successfully!");
+            deleteClassroom(classroom, school, manager);
             shouldExit = true; // Exit after deletion
         }},
         {"BACK", "Go back to the school setup", [&shouldExit]() { shouldExit = true; }}
