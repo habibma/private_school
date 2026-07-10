@@ -7,7 +7,7 @@
 #include "Student.hpp"
 #include "utils/Terminal.hpp"
 
-Student promptStudent()
+Student promptStudentInfo()
 {
     std::string studentFirstname = getValidName("First name: ");
     std::string studentLastname = getValidName("Last name: ");
@@ -21,7 +21,7 @@ Student promptStudent()
 
 void addStudentToClassroom(Classroom &classroom, School &school, SchoolManager &manager)
 {
-    Student student = promptStudent();
+    Student student = promptStudentInfo();
     if (student.getName().empty()) {
         return;
     }
